@@ -1,0 +1,15 @@
+
+ import "./question.zmodel"  
+
+model Answer {
+
+    id                String        @id @default(uuid())  
+    content      String          
+    dateAnswered  String          
+    questionId  String?          
+    question    Question?    @relation(fields: [questionId], references: [id], name:"question")  
+
+dateCreated DateTime @default(now())
+      dateUpdated DateTime @updatedAt  @default(now())
+      @@allow("all", true)
+}

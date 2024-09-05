@@ -1,0 +1,20 @@
+
+ import "./user.zmodel"  
+ import "./organization.zmodel"  
+ import "./answer.zmodel"  
+
+model Question {
+
+    id                String        @id @default(uuid())  
+    content      String          
+    dateAsked  String          
+    userId        String?          
+    user            User?            @relation(fields: [userId], references: [id], name:"user")  
+    organizationId  String?          
+    organization  Organization?  @relation(fields: [organizationId], references: [id], name:"organization")  
+
+answers      Answer[]    @relation("question")  
+      dateCreated DateTime @default(now())
+      dateUpdated DateTime @updatedAt  @default(now())
+      @@allow("all", true)
+}
