@@ -19,7 +19,7 @@ export default function ChatbotInteractionPage() {
   const { enqueueSnackbar } = useSnackbar()
   const [question, setQuestion] = useState<string>('')
   const [chatHistory, setChatHistory] = useState<
-    { question: string; answer: string }[]
+    { question: string; answer: string; timestamp: number }[]
   >([])
 
   const { mutateAsync: generateText } = Api.ai.generateText.useMutation()
@@ -31,7 +31,10 @@ export default function ChatbotInteractionPage() {
     }
     try {
       const response = await generateText({ prompt: question })
-      setChatHistory([...chatHistory, { question, answer: response.answer }])
+      setChatHistory([
+        { question, answer: response.answer, timestamp: Date.now() },
+        ...chatHistory,
+      ])
       setQuestion('')
     } catch (error) {
       enqueueSnackbar('Failed to get response from AI', { variant: 'error' })
@@ -75,12 +78,17 @@ export default function ChatbotInteractionPage() {
             dataSource={chatHistory}
             renderItem={item => (
               <List.Item>
-                <List.Item.Meta
-                  title={<Text strong>Question:</Text>}
-                  description={item.question}
-                />
-                <div>
-                  <Text strong>Answer:</Text> {item.answer}
+                <div style={{ width: '100%' }}>
+                  <Text strong>Question: </Text>
+                  <Text>{item.question}</Text>
+                  <br />
+                  <Text strong>Answer: </Text>
+                  <Text>{item.answer}</Text>
+                  <div style={{ textAlign: 'right' }}>
+                    <Text type="secondary">
+                      {dayjs(item.timestamp).format('YYYY-MM-DD HH:mm:ss')}
+                    </Text>
+                  </div>
                 </div>
               </List.Item>
             )}
