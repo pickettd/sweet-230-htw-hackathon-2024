@@ -19,13 +19,13 @@ export default function HomePage() {
   const { enqueueSnackbar } = useSnackbar()
 
   const { data: chatbotInteractions, isLoading: isLoadingChatbot } =
-    Api.chatbotInteraction.findMany.useQuery({
+    Api.interaction.findMany.useQuery({
       where: { userId: user?.id },
       include: { user: true },
     })
 
   const { data: workspaceActivities, isLoading: isLoadingWorkspace } =
-    Api.workspaceActivity.findMany.useQuery({
+    Api.statistics.findMany.useQuery({
       where: { organizationId: params.organizationId },
       include: { organization: true, user: true },
     })
@@ -43,11 +43,9 @@ export default function HomePage() {
       <Row gutter={[16, 16]} justify="center">
         {isAdmin && (
           <Col span={24}>
-            <Card
-              title="Workspace Activity"
-              bordered={false}
-              icon={<TeamOutlined />}
-            >
+            <Card title="Workspace Activity" bordered={false}>
+              <TeamOutlined />
+
               {isLoadingWorkspace ? (
                 <Spin />
               ) : (
@@ -64,11 +62,9 @@ export default function HomePage() {
         )}
         {!isAdmin && (
           <Col span={24}>
-            <Card
-              title="Recent Chatbot Interactions"
-              bordered={false}
-              icon={<UserOutlined />}
-            >
+            <Card title="Recent Chatbot Interactions" bordered={false}>
+              <UserOutlined />
+
               {isLoadingChatbot ? (
                 <Spin />
               ) : (
