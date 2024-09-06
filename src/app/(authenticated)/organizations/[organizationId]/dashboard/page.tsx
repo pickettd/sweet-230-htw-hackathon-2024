@@ -54,10 +54,10 @@ export default function WorkspaceDashboardPage() {
               <List
                 itemLayout="horizontal"
                 dataSource={interactions}
-                renderItem={interaction => (
+                renderItem={(interaction: any) => (
                   <List.Item>
                     <List.Item.Meta
-                      title={interaction.chatbot.name}
+                      title={interaction.chatbot?.name}
                       description={dayjs(interaction.dateCreated).format(
                         'YYYY-MM-DD HH:mm',
                       )}
@@ -84,11 +84,11 @@ export default function WorkspaceDashboardPage() {
                 <List
                   itemLayout="horizontal"
                   dataSource={statistics}
-                  renderItem={stat => (
+                  renderItem={(stat: any) => (
                     <List.Item>
                       <List.Item.Meta
                         title={stat.metric}
-                        description={stat.value.toString()}
+                        description={stat.value?.toString()}
                       />
                     </List.Item>
                   )}
