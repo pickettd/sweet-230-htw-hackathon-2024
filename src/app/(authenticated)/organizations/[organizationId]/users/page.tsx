@@ -37,7 +37,8 @@ export default function UserManagementPage() {
 
   const handleInviteUser = async () => {
     try {
-      await createUser({ data: { email: newUserEmail, status: 'invited' } })
+      await createUser({ data: { email: newUserEmail, status: 'INVITED' } })
+
       enqueueSnackbar('User invited successfully', { variant: 'success' })
       refetch()
       setIsModalVisible(false)
@@ -71,7 +72,7 @@ export default function UserManagementPage() {
     {
       title: 'Actions',
       key: 'actions',
-      render: (text: any, record: Prisma.User) => (
+      render: (text: any, record: any) => (
         <Space size="middle">
           <Popconfirm
             title="Are you sure to delete this user?"

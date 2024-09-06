@@ -40,9 +40,7 @@ export default function BillingandSubscriptionPage() {
     useState<
       Prisma.BillingDataGetPayload<{ include: { organization: true } }>
     >()
-  const [users, setUsers] = useState<
-    Prisma.UserGetPayload<{ include: { organizationRoles: true } }[]>
-  >([])
+  const [users, setUsers] = useState<Prisma.UserGetPayload<{}>[]>([])
 
   const {
     data: billingData,
@@ -61,7 +59,6 @@ export default function BillingandSubscriptionPage() {
     where: {
       organizationRoles: { some: { organizationId: organization?.id } },
     },
-    include: { organizationRoles: true },
   })
 
   const { mutateAsync: updateBilling } = Api.billingData.update.useMutation()
@@ -69,7 +66,7 @@ export default function BillingandSubscriptionPage() {
 
   useEffect(() => {
     if (billingData) setBillingInfo(billingData)
-    if (usersData) setUsers(usersData)
+    if (usersData) setUsers(usersData || [])
   }, [billingData, usersData])
 
   const handleUpdateBilling = async (values: any) => {
@@ -180,7 +177,7 @@ export default function BillingandSubscriptionPage() {
           title="Manage Users"
           extra={<Button icon={<UserAddOutlined />}>Add User</Button>}
         >
-          <Table dataSource={users} columns={columns} rowKey="id" />
+          <Table dataSource={users || []} columns={columns} rowKey="id" />
         </Card>
       </Spin>
     </PageLayout>
