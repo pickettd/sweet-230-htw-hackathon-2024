@@ -80,7 +80,7 @@ export class Openai {
     let threadId = thread.id
     console.log('Created thread with Id: ' + threadId)
     const run = await this.api.beta.threads.runs.createAndPoll(thread.id, {
-      assistant_id: exampleAssistantId,
+      assistant_id: this.exampleAssistantId,
     })
 
     console.log('Run finished with status: ' + run.status)
