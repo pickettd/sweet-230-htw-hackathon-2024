@@ -9,7 +9,7 @@ class Service {
     prompt: string,
     attachmentUrls?: string[],
   ): Promise<string> {
-    return this.openai.generateText(prompt, attachmentUrls)
+    return this.openai.generateAssistantText(prompt, attachmentUrls)
   }
 
   async generateJson<SchemaType extends ZodType>(

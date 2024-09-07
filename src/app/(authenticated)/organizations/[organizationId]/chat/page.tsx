@@ -1,16 +1,15 @@
 'use client'
 
-import { useState } from 'react'
-import { Typography, Input, Button, List, Spin, Row, Col } from 'antd'
-import { SendOutlined } from '@ant-design/icons'
-const { Title, Text } = Typography
 import { useUserContext } from '@/core/context'
-import { useRouter, useParams } from 'next/navigation'
-import { useUploadPublic } from '@/core/hooks/upload'
-import { useSnackbar } from 'notistack'
-import dayjs from 'dayjs'
 import { Api } from '@/core/trpc'
 import { PageLayout } from '@/designSystem/layouts/Page.layout'
+import { SendOutlined } from '@ant-design/icons'
+import { Button, Col, Input, List, Row, Typography } from 'antd'
+import dayjs from 'dayjs'
+import { useParams, useRouter } from 'next/navigation'
+import { useSnackbar } from 'notistack'
+import { useState } from 'react'
+const { Title, Text } = Typography
 
 export default function ChatbotInteractionPage() {
   const router = useRouter()
@@ -48,7 +47,7 @@ export default function ChatbotInteractionPage() {
           <Title level={2}>AI Chatbot</Title>
           <Text>
             Ask questions about company policies, time off, and benefits. View
-            responses from the AI chatbot.
+            responses from the AI chatbot. This is loaded with the PMF handbook.
           </Text>
         </Col>
       </Row>
