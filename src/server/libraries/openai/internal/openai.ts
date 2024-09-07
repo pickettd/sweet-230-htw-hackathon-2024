@@ -97,7 +97,7 @@ export class Openai {
     if (run.status == 'completed') {
       const messages = await this.api.beta.threads.messages.list(thread.id)
       const paginatedMsgs = messages.getPaginatedItems()
-      return paginatedMsgs[0]?.content?.text?.value
+      return paginatedMsgs[0]?.content[0]?.text?.value
       // for (const message of messages.getPaginatedItems()) {
       //   console.log(message);
       // }
