@@ -4,20 +4,13 @@
     <img src="https://marblism-dashboard-api--production-public.s3.us-west-1.amazonaws.com/marblism-logo.png" height="150" alt="Marblism Logo" />
   </a>
 </p>
-<h1 align="center" style="margin: 0;">In Marble We Trust</h1>
-
-<a  style="margin: 0;" target="_blank" href="https://marblism.com">
-<p align="center" style="margin: 0; letter-spacing: 3px;
-text-decoration: none;">
-marblism
-</p>
-</a>
+<h1 align="center" style="margin: 0;">mel_bot the HR</h1>
 </div>
 <div style="height: 50px; background: linear-gradient(#000000, transparent);"></div>
 
 ## Documentation
 
-Learn more in the [official documentation](https://dev.marblism.com).
+Built on Marblism. Learn more in the [official documentation](https://dev.marblism.com).
 
 ## Installation
 
@@ -54,11 +47,3 @@ $ pnpm run dev
 $ pnpm run build
 $ pnpm run start
 ```
-
-## Support
-
-We reply FAST on our <a target="_blank" href="https://discord.gg/GScNz7kAEu">Discord server</a>.
-
-## Stay in touch
-
-[@marblismAI](https://twitter.com/marblismAI)
