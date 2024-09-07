@@ -4,7 +4,7 @@ import { zodResponseFormat } from 'openai/helpers/zod'
 import { ParsedChatCompletion } from 'openai/resources/beta/chat/completions'
 import { z, ZodType } from 'zod'
 
-const exampleAssistantId = process.env["TEST_ASSISTANT_PMF_HB_ID"]
+const exampleAssistantId = process.env['TEST_ASSISTANT_PMF_HB_ID']
 
 enum OpenaiModel {
   DEFAULT = 'gpt-4o-mini',
@@ -68,24 +68,24 @@ export class Openai {
   ): Promise<string> {
     const messages = this.buildMessages(prompt, attachmentUrls)
     const thread = await this.api.beta.threads.create({
-      messages
-    });
-    let threadId = thread.id;
-  console.log("Created thread with Id: " + threadId);
-  const run = await this.api.beta.threads.runs.createAndPoll(thread.id, {
-    assistant_id: exampleAssistantId,
-  });
+      messages,
+    })
+    let threadId = thread.id
+    console.log('Created thread with Id: ' + threadId)
+    const run = await this.api.beta.threads.runs.createAndPoll(thread.id, {
+      assistant_id: exampleAssistantId,
+    })
 
-  console.log("Run finished with status: " + run.status);
+    console.log('Run finished with status: ' + run.status)
 
-  if (run.status == "completed") {
-    const messages = await this.api.beta.threads.messages.list(thread.id);
-    const paginatedMsgs = messages.getPaginatedItems();
-    return paginatedMsgs[0]?.content?.text?.value;
-    // for (const message of messages.getPaginatedItems()) {
-    //   console.log(message);
-    // }
-  }
+    if (run.status == 'completed') {
+      const messages = await this.api.beta.threads.messages.list(thread.id)
+      const paginatedMsgs = messages.getPaginatedItems()
+      return paginatedMsgs[0]?.content?.text?.value
+      // for (const message of messages.getPaginatedItems()) {
+      //   console.log(message);
+      // }
+    }
 
     return null
   }
