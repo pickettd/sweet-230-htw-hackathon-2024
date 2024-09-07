@@ -33,14 +33,19 @@ export default function ChatbotInteractionPage() {
     try {
       console.log('Starting Rag query now')
       const response = await generateText({ prompt: question })
+      const respAnswer = response.answer
+      console.log(response)
 
-      setChatHistory([
-        { question, answer: response.answer, timestamp: Date.now() },
-        ...chatHistory,
-      ])
       // console.log('also launching assistant')
       // const assistResponse = await generateAssistantText({ prompt: question })
-      // console.log(assistResponse)
+      // const respAnswer = assistResponse.answer
+      //console.log(assistResponse)
+
+      setChatHistory([
+        { question, answer: respAnswer, timestamp: Date.now() },
+        ...chatHistory,
+      ])
+
       setQuestion('')
     } catch (error) {
       enqueueSnackbar('Failed to get response from AI', { variant: 'error' })
