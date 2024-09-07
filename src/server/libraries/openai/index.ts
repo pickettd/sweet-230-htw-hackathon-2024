@@ -9,7 +9,10 @@ class Service {
     prompt: string,
     attachmentUrls?: string[],
   ): Promise<string> {
-    return this.openai.generateAssistantText(prompt, attachmentUrls)
+    // Use Marblism RAG
+    return this.openai.generateText(prompt, attachmentUrls)
+    // Use our assistant AI
+    //return this.openai.generateAssistantText(prompt, attachmentUrls)
   }
 
   async generateJson<SchemaType extends ZodType>(

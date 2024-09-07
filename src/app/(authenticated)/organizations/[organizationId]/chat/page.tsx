@@ -21,7 +21,8 @@ export default function ChatbotInteractionPage() {
     { question: string; answer: string; timestamp: number }[]
   >([])
 
-  const { mutateAsync: generateText } = Api.ai.generateText.useMutation()
+  //const { mutateAsync: generateText } = Api.ai.generateText.useMutation()
+  const { mutateAsync: generateText } = Api.rag.generateText.useMutation()
 
   const handleAskQuestion = async () => {
     if (!question.trim()) {
