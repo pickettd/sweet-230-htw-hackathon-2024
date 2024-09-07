@@ -79,8 +79,17 @@ export class Openai {
     })
     let threadId = thread.id
     console.log('Created thread with Id: ' + threadId)
+
+    // See if we can create an assistant
+    const assistant = await this.api.beta.assistants.create({
+      model: OpenaiModel.DEFAULT,
+      name: 'Math Tutor',
+      instructions: 'You are working in the HR department.',
+      // tools = [],
+    })
     const run = await this.api.beta.threads.runs.createAndPoll(thread.id, {
-      assistant_id: this.exampleAssistantId,
+      //assistant_id: this.exampleAssistantId,
+      assistant_id: assistant.id,
     })
 
     console.log('Run finished with status: ' + run.status)
