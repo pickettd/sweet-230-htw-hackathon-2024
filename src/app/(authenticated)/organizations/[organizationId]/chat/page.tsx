@@ -21,7 +21,8 @@ export default function ChatbotInteractionPage() {
     { question: string; answer: string; timestamp: number }[]
   >([])
 
-  //const { mutateAsync: generateText } = Api.ai.generateText.useMutation()
+  const { mutateAsync: generateAssistantText } =
+    Api.ai.generateAssistantText.useMutation()
   const { mutateAsync: generateText } = Api.rag.generateText.useMutation()
 
   const handleAskQuestion = async () => {
@@ -30,11 +31,16 @@ export default function ChatbotInteractionPage() {
       return
     }
     try {
+      console.log('Starting Rag query now')
       const response = await generateText({ prompt: question })
+
       setChatHistory([
         { question, answer: response.answer, timestamp: Date.now() },
         ...chatHistory,
       ])
+      // console.log('also launching assistant')
+      // const assistResponse = await generateAssistantText({ prompt: question })
+      // console.log(assistResponse)
       setQuestion('')
     } catch (error) {
       enqueueSnackbar('Failed to get response from AI', { variant: 'error' })

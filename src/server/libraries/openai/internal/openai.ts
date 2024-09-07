@@ -57,6 +57,7 @@ export class Openai {
     prompt: string,
     attachmentUrls?: string[],
   ): Promise<string> {
+    console.log('in generateText - building messages first', { prompt })
     const messages = this.buildMessages(prompt, attachmentUrls)
 
     const response = await this.api.chat.completions.create({
@@ -73,6 +74,9 @@ export class Openai {
     prompt: string,
     attachmentUrls?: string[],
   ): Promise<string> {
+    console.log('in generateAssistantText - building messages first', {
+      prompt,
+    })
     const messages = this.buildMessages(prompt, attachmentUrls)
     const thread = await this.api.beta.threads.create({
       messages,

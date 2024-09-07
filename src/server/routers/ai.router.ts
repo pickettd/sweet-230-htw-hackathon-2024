@@ -46,6 +46,23 @@ export const AiRouter = Trpc.createRouter({
 
       return { answer }
     }),
+  generateAssistantText: Trpc.procedure
+    .input(
+      z.object({
+        prompt: z.string(),
+        attachmentUrls: z.array(z.string()).optional(),
+      }),
+    )
+    .mutation(async ({ input }) => {
+      check()
+
+      const answer = await OpenaiService.generateAssistantText(
+        input.prompt,
+        input.attachmentUrls,
+      )
+
+      return { answer }
+    }),
 
   /**
    * ? The schema in this function is an example. You should update it to your use-case.
