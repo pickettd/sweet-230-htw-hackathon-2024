@@ -38,9 +38,9 @@ export default function ChatbotInteractionPage() {
         { question, answer: response.answer, timestamp: Date.now() },
         ...chatHistory,
       ])
-      // console.log('also launching assistant')
-      // const assistResponse = await generateAssistantText({ prompt: question })
-      // console.log(assistResponse)
+      console.log('also launching assistant')
+      const assistResponse = await generateAssistantText({ prompt: question })
+      console.log(assistResponse)
       setQuestion('')
     } catch (error) {
       enqueueSnackbar('Failed to get response from AI', { variant: 'error' })

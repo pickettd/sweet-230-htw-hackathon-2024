@@ -31,7 +31,7 @@ export class Openai {
       }
       if (!exampleAssistantId) {
         console.log(
-          `Set TEST_ASSISTANT_PMF_HB_ID in your .env to activate OpenAI`,
+          `Set TEST_ASSISTANT_PMF_HB_ID in your .env to activate OpenAI Assistants`,
         )
         return
       }
