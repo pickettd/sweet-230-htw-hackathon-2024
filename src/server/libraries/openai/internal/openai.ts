@@ -23,7 +23,7 @@ export class Openai {
   private initialize(): void {
     try {
       const apiKey = process.env.SERVER_OPENAI_API_KEY
-      const exampleAssistantId = process.env['TEST_ASSISTANT_PMF_HB_ID']
+      const exampleAssistantId = process.env.TEST_ASSISTANT_PMF_HB_ID
 
       if (!apiKey) {
         console.log(`Set SERVER_OPENAI_API_KEY in your .env to activate OpenAI`)
