@@ -4,8 +4,6 @@ import { zodResponseFormat } from 'openai/helpers/zod'
 import { ParsedChatCompletion } from 'openai/resources/beta/chat/completions'
 import { z, ZodType } from 'zod'
 
-const exampleAssistantId = process.env['TEST_ASSISTANT_PMF_HB_ID']
-
 enum OpenaiModel {
   DEFAULT = 'gpt-4o-mini',
   JSON = 'gpt-4o-mini',
@@ -16,6 +14,7 @@ enum OpenaiModel {
 
 export class Openai {
   private api: OpenaiSDK
+  private exampleAssistantId: any
 
   constructor() {
     this.initialize()
@@ -24,13 +23,21 @@ export class Openai {
   private initialize(): void {
     try {
       const apiKey = process.env.SERVER_OPENAI_API_KEY
+      const exampleAssistantId = process.env['TEST_ASSISTANT_PMF_HB_ID']
 
       if (!apiKey) {
         console.log(`Set SERVER_OPENAI_API_KEY in your .env to activate OpenAI`)
         return
       }
+      if (!exampleAssistantId) {
+        console.log(
+          `Set TEST_ASSISTANT_PMF_HB_ID in your .env to activate OpenAI`,
+        )
+        return
+      }
 
       this.api = new OpenaiSDK({ apiKey })
+      this.exampleAssistantId = exampleAssistantId
 
       console.log(`Openai is active`)
     } catch (error) {
