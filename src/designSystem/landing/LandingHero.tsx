@@ -1,6 +1,9 @@
 import { HTMLAttributes, ReactNode } from 'react'
 import { DesignSystemUtility } from '../helpers/utility'
 import LandingButton from './LandingButton'
+import { Typography } from 'antd'
+
+const { Title, Paragraph } = Typography
 
 interface Props extends HTMLAttributes<HTMLElement> {
   title: string
@@ -21,34 +24,40 @@ export const LandingHero: React.FC<Props> = ({
 }) => {
   return (
     <section
-      className={DesignSystemUtility.buildClassNames('', className)}
+      className={DesignSystemUtility.buildClassNames(
+        'bg-primary text-white',
+        className,
+      )}
       {...props}
     >
-      <div className="py-8 lg:py-44 px-5  max-w-7xl mx-auto  grid lg:grid-cols-2 place-items-center relative">
-        <div className="relative z-10 p-4 md:p-0">
-          <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold lg:tracking-tight xl:tracking-tighter">
+      <div className="py-16 lg:py-24 px-5 max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+        <div className="text-center lg:text-left">
+          <Title
+            level={1}
+            className="text-4xl lg:text-5xl font-bold text-white mb-6"
+          >
             {title}
-          </h1>
-          <p className="text-lg mt-4 text-slate-600 dark:text-slate-400 max-w-xl">
+          </Title>
+          <Paragraph className="text-lg mb-8 text-white/80">
             {subtitle}
-          </p>
-          <div className="mt-6 flex flex-col sm:flex-row gap-3">
+          </Paragraph>
+          <div className="flex justify-center lg:justify-start">
             <LandingButton
               href={'/login'}
-              className="flex gap-1 items-center justify-center "
-              rel="noopener"
-              size="lg"
+              className="bg-white text-primary hover:bg-white/90"
+              size="large"
             >
               {buttonText}
             </LandingButton>
           </div>
-          {socialProof && <div className="mt-6">{socialProof}</div>}
+          {socialProof && <div className="mt-8">{socialProof}</div>}
         </div>
 
-        <div className="lg:absolute right-0 top-0 w-4/5 lg:w-1/2 h-full">
+        <div className="relative">
           <img
             src={pictureUrl}
-            className="mask-stripes object-cover w-full h-full"
+            alt="Hero image"
+            className="rounded-lg shadow-xl w-full"
           />
         </div>
       </div>

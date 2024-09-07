@@ -1,5 +1,8 @@
 import { HTMLAttributes } from 'react'
+import { Typography, Avatar, Card } from 'antd'
 import { DesignSystemUtility } from '../helpers/utility'
+
+const { Title, Paragraph } = Typography
 
 type Testimonial = {
   name: string
@@ -27,18 +30,16 @@ export const LandingTestimonials: React.FC<Props> = ({
       className={DesignSystemUtility.buildClassNames('py-16 px-5', className)}
       {...props}
     >
-      <div className="max-w-5xl mx-auto px-4 py-16 relative group overflow-hidden">
-        <div className="mt-16 md:mt-0 text-center">
-          <h2 className="text-4xl lg:text-5xl font-bold lg:tracking-tight">
+      <div className="max-w-6xl mx-auto px-4 py-16">
+        <div className="text-center mb-12">
+          <Title level={2} className="text-4xl font-bold mb-4">
             {title}
-          </h2>
-          <p className="text-lg mt-4 text-slate-600 dark:text-slate-400">
-            {subtitle}
-          </p>
+          </Title>
+          <Paragraph className="text-lg text-gray-600">{subtitle}</Paragraph>
         </div>
 
-        <div className="mt-8 [column-fill:_balance] sm:columns-2 sm:gap-6 lg:columns-3 lg:gap-8">
-          {testimonials.map((testimonial: Testimonial, idx: number) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {testimonials?.map((testimonial: Testimonial, idx: number) => (
             <TestimonialCard key={`testimonial-${idx}`} {...testimonial} />
           ))}
         </div>
@@ -54,27 +55,17 @@ const TestimonialCard = ({
   avatar,
 }: Testimonial) => {
   return (
-    <div className="mb-8 sm:break-inside-avoid">
-      <blockquote className="rounded-lg bg-gray-50 dark:bg-slate-800 p-6 shadow-sm sm:p-8">
-        <div className="flex items-center gap-4">
-          <img
-            alt=""
-            src={avatar}
-            className="size-14 rounded-full object-cover"
-          />
-
-          <div>
-            <p className="mt-0.5 text-lg font-medium text-gray-900 dark:text-slate-300">
-              {name}
-            </p>
-            <p className="flex gap-0.5 text-gray-800 dark:text-slate-400">
-              {designation}
-            </p>
-          </div>
+    <Card className="h-full shadow-md hover:shadow-lg transition-shadow duration-300">
+      <div className="flex items-center mb-4">
+        <Avatar src={avatar} size={64} className="mr-4" />
+        <div>
+          <Title level={4} className="mb-0">
+            {name}
+          </Title>
+          <Paragraph className="text-gray-600 mb-0">{designation}</Paragraph>
         </div>
-
-        <p className="mt-4 text-gray-700 dark:text-slate-400">{content}</p>
-      </blockquote>
-    </div>
+      </div>
+      <Paragraph className="text-gray-700">{content}</Paragraph>
+    </Card>
   )
 }

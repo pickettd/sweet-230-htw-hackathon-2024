@@ -19,13 +19,13 @@ export default function HomePage() {
   const { enqueueSnackbar } = useSnackbar()
 
   const { data: chatbotInteractions, isLoading: isLoadingChatbot } =
-    Api.interaction.findMany.useQuery({
+    Api.chatbotInteraction.findMany.useQuery({
       where: { userId: user?.id },
       include: { user: true },
     })
 
   const { data: workspaceActivities, isLoading: isLoadingWorkspace } =
-    Api.statistics.findMany.useQuery({
+    Api.workspaceActivity.findMany.useQuery({
       where: { organizationId: params.organizationId },
       include: { organization: true, user: true },
     })

@@ -1,8 +1,17 @@
 @import './landing.scss';
 
+:root {
+  --primary-color: #1890ff;
+  --text-color: #333333;
+  --background-color: #ffffff;
+}
+
 body {
   display: block;
   margin: 0px;
+  font-family: 'Inter', sans-serif;
+  color: var(--text-color);
+  background-color: var(--background-color);
 }
 
 body,
@@ -13,20 +22,26 @@ body,
   overflow-y: auto;
 }
 
-.ant-breadcrumb a {
+a {
+  color: var(--primary-color);
   text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
+
+.ant-breadcrumb a,
 .ant-dropdown-menu-title-content a {
   text-decoration: none;
 }
 
 .ant-layout-sider-children {
   width: 100%;
-}
-.ant-layout-sider-children {
   display: flex;
   flex-direction: column;
 }
+
 .ant-menu-item-selected::after,
 .ant-menu-item::after,
 .ant-menu-item-active::after,
@@ -35,17 +50,22 @@ body,
 .ant-menu-submenu::after {
   border-bottom: none !important;
 }
-.ant-typography a,
-.ant-btn-link > span {
-  text-underline-offset: 0.2em;
-  text-decoration: underline;
+
+.ant-typography {
+  a,
+  .ant-btn-link > span {
+    text-underline-offset: 0.2em;
+    text-decoration: underline;
+
+    &:hover {
+      color: color-mix(in srgb, var(--primary-color) 90%, black);
+    }
+  }
 }
-.ant-typography a:hover {
-  text-underline-offset: 0.2em;
-  text-decoration: underline;
-}
+
 .ant-menu-item-selected {
-  font-weight: 500;
+  font-weight: 600;
+  color: var(--primary-color);
 }
 
 .ant-form {
@@ -62,6 +82,7 @@ body,
     font-weight: normal;
     visibility: visible;
     padding-left: 10px;
+    color: #888888;
   }
 }
 
@@ -69,6 +90,7 @@ body,
   &:active,
   &:hover {
     border-color: transparent;
+    color: color-mix(in srgb, var(--primary-color) 90%, black);
   }
 }
 
@@ -83,3 +105,25 @@ body,
   }
 }
 
+// New global classes
+.text-primary {
+  color: var(--primary-color);
+}
+
+.bg-primary {
+  background-color: var(--primary-color);
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.rounded {
+  border-radius: 8px;
+}
+
+.shadow-md {
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}

@@ -17,11 +17,10 @@ export const LandingContainer: React.FC<Props> = ({
   ...props
 }) => {
   return (
-    <main {...props}>
-      <div className={'bg-white text-black dark:bg-black dark:text-slate-200'}>
+    <main {...props} className="bg-[#FFA07A] text-white min-h-screen">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <LandingNavBar navItems={navItems} />
         {children}
-
         <LandingFooter />
       </div>
     </main>

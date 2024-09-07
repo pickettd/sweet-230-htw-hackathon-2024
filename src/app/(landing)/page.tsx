@@ -11,96 +11,96 @@ import { LandingSocialProof } from '@/designSystem/landing/LandingSocialProof'
 import { LandingSocialRating } from '@/designSystem/landing/LandingSocialRating'
 import { LandingTestimonials } from '@/designSystem/landing/LandingTestimonials'
 import {
-  EditOutlined,
-  TeamOutlined,
-  ClockCircleOutlined,
-  SmileOutlined,
-  DollarOutlined,
-  MessageOutlined,
+  ApiOutlined,
+  BarChartOutlined,
+  RobotOutlined,
+  SafetyOutlined,
+  SettingOutlined,
+  UserOutlined,
 } from '@ant-design/icons'
 
 export default function LandingPage() {
   const features = [
     {
-      heading: 'Instant Answers',
+      heading: 'AI-Powered Responses',
       description:
-        'Get immediate responses to your HR queries, from company policies to benefits.',
-      icon: <ClockCircleOutlined />,
+        'Get instant, accurate answers to HR queries using advanced AI technology.',
+      icon: <RobotOutlined />,
     },
     {
-      heading: 'Seamless Integration',
+      heading: 'Multi-Platform Integration',
       description:
-        'Integrated with Slack and SMS for easy access and communication.',
-      icon: <MessageOutlined />,
+        'Seamlessly works with Slack, MS Teams, and email for universal access.',
+      icon: <ApiOutlined />,
     },
     {
-      heading: 'Role-Based Access',
+      heading: 'Customizable Workflows',
       description:
-        'Admins can manage workspaces and invite users, while employees interact with the chatbot.',
-      icon: <TeamOutlined />,
+        'Create tailored HR processes and automate routine tasks effortlessly.',
+      icon: <SettingOutlined />,
     },
     {
-      heading: 'Scalable Billing',
+      heading: 'Data-Driven Insights',
       description:
-        'Team-based billing system that scales with your business size.',
-      icon: <DollarOutlined />,
+        'Gain valuable HR analytics to make informed decisions and improve policies.',
+      icon: <BarChartOutlined />,
     },
     {
-      heading: 'Enhanced Productivity',
+      heading: 'Compliance Management',
       description:
-        'Automate routine HR tasks, freeing up time for strategic initiatives.',
-      icon: <EditOutlined />,
+        'Stay up-to-date with changing regulations and ensure policy adherence.',
+      icon: <SafetyOutlined />,
     },
     {
-      heading: 'Employee Satisfaction',
+      heading: 'Employee Self-Service',
       description:
-        'Quick access to information reduces frustration and increases satisfaction.',
-      icon: <SmileOutlined />,
+        'Empower employees with easy access to HR information and request management.',
+      icon: <UserOutlined />,
     },
   ]
 
   const testimonials = [
     {
-      name: 'John Doe',
-      designation: 'HR Manager',
+      name: 'Sarah Johnson',
+      designation: 'Chief People Officer',
       content:
-        'Mel has revolutionized our HR processes. Our team is more productive and employees are happier!',
-      avatar: 'https://randomuser.me/api/portraits/men/5.jpg',
+        'Mel has transformed our HR department. The AI-powered responses have reduced query resolution time by 70%.',
+      avatar: 'https://randomuser.me/api/portraits/women/28.jpg',
     },
     {
-      name: 'Jane Smith',
-      designation: 'CEO',
+      name: 'Alex Chen',
+      designation: 'Head of Talent Acquisition',
       content:
-        'Integrating Mel into our company was a game-changer. Immediate access to information has boosted our efficiency.',
-      avatar: 'https://randomuser.me/api/portraits/women/6.jpg',
+        'The customizable workflows in Mel have streamlined our onboarding process, saving us countless hours.',
+      avatar: 'https://randomuser.me/api/portraits/men/32.jpg',
     },
     {
-      name: 'Michael Johnson',
-      designation: 'CTO',
+      name: 'Priya Patel',
+      designation: 'Compliance Manager',
       content:
-        'The seamless integration with Slack and SMS makes Mel an invaluable tool for our team.',
-      avatar: 'https://randomuser.me/api/portraits/men/7.jpg',
+        "Mel's compliance management features keep us ahead of regulatory changes. It's been a game-changer for risk mitigation.",
+      avatar: 'https://randomuser.me/api/portraits/women/44.jpg',
     },
     {
-      name: 'Emily Davis',
-      designation: 'HR Specialist',
+      name: 'Tom Baker',
+      designation: 'Employee Experience Lead',
       content:
-        'Mel has significantly reduced the time we spend on routine HR tasks. Highly recommend!',
-      avatar: 'https://randomuser.me/api/portraits/men/12.jpg',
+        'The self-service portal has empowered our employees and significantly reduced the load on our HR team.',
+      avatar: 'https://randomuser.me/api/portraits/men/41.jpg',
     },
     {
-      name: 'David Wilson',
-      designation: 'Operations Manager',
+      name: 'Maria Rodriguez',
+      designation: 'HR Analytics Specialist',
       content:
-        'Our employees love the instant answers they get from Mel. It’s a fantastic addition to our HR toolkit.',
-      avatar: 'https://randomuser.me/api/portraits/men/17.jpg',
+        'The data-driven insights from Mel have allowed us to make informed decisions about our HR policies and practices.',
+      avatar: 'https://randomuser.me/api/portraits/women/63.jpg',
     },
     {
-      name: 'Sophia Brown',
-      designation: 'HR Director',
+      name: 'James Lee',
+      designation: 'IT Director',
       content:
-        'Mel has streamlined our HR processes, making our team more efficient and our employees more satisfied.',
-      avatar: 'https://randomuser.me/api/portraits/women/27.jpg',
+        'Integrating Mel with our existing systems was seamless. The multi-platform support is impressive.',
+      avatar: 'https://randomuser.me/api/portraits/men/55.jpg',
     },
   ]
 
@@ -121,53 +121,68 @@ export default function LandingPage() {
 
   const packages = [
     {
-      title: 'Basic',
-      description: 'Ideal for small teams',
-      monthly: 9,
-      yearly: 69,
-      features: ['Instant Answers', 'Slack Integration'],
+      title: 'Starter',
+      description: 'For small businesses',
+      monthly: 19,
+      yearly: 190,
+      features: [
+        'AI-Powered Responses',
+        'Slack Integration',
+        'Basic Analytics',
+      ],
     },
     {
-      title: 'Pro',
-      description: 'Perfect for growing businesses',
-      monthly: 29,
-      yearly: 249,
-      features: ['All Basic Features', 'SMS Integration', 'Role-Based Access'],
+      title: 'Professional',
+      description: 'For growing companies',
+      monthly: 49,
+      yearly: 490,
+      features: [
+        'All Starter Features',
+        'MS Teams Integration',
+        'Custom Workflows',
+        'Advanced Analytics',
+      ],
       highlight: true,
     },
     {
       title: 'Enterprise',
-      description: 'Best for large organizations',
-      monthly: 99,
-      yearly: 999,
+      description: 'For large organizations',
+      monthly: 'Custom',
+      yearly: 'Custom',
       features: [
-        'All Pro Features',
-        'Dedicated Support',
+        'All Professional Features',
+        'Dedicated Account Manager',
         'Custom Integrations',
+        'On-Premise Deployment Option',
       ],
     },
   ]
 
   const questionAnswers = [
     {
-      question: 'How does Mel integrate with Slack?',
+      question: "How accurate are Mel's AI-powered responses?",
       answer:
-        'Mel can be added to your Slack workspace, allowing employees to ask questions directly within Slack.',
+        "Mel's AI is trained on vast HR datasets and continuously learns from interactions, achieving over 95% accuracy in responses.",
     },
     {
-      question: 'Is there a limit to the number of users?',
+      question: "Can Mel be customized for our company's specific policies?",
       answer:
-        'No, Mel’s team-based billing system scales with your business, accommodating any number of users.',
+        "Absolutely! Mel can be trained on your company's unique HR policies and procedures for tailored, accurate responses.",
     },
     {
-      question: 'Can admins manage user roles?',
+      question: 'How does Mel ensure data security and privacy?',
       answer:
-        'Yes, admins have the ability to manage the workspace and invite users.',
+        'Mel employs bank-level encryption, regular security audits, and is fully GDPR and CCPA compliant to protect your sensitive HR data.',
     },
     {
-      question: 'What kind of support is available?',
+      question: 'What kind of analytics does Mel provide?',
       answer:
-        'We offer various support options depending on your package, including dedicated support for Enterprise users.',
+        'Mel offers comprehensive analytics including query trends, response times, employee satisfaction metrics, and custom reports to drive HR insights.',
+    },
+    {
+      question: 'How often is Mel updated with new features?',
+      answer:
+        'We release major updates quarterly, with minor improvements and bug fixes rolled out continuously based on user feedback and industry trends.',
     },
   ]
 
@@ -181,35 +196,47 @@ export default function LandingPage() {
   const steps = [
     {
       heading: 'Sign Up',
-      description: 'Create an account and set up your workspace.',
+      description: 'Create your Mel account and choose your plan.',
+    },
+    {
+      heading: 'Configure',
+      description: 'Set up your HR knowledge base and customize workflows.',
     },
     {
       heading: 'Integrate',
-      description: 'Add Mel to your Slack or SMS system.',
+      description: 'Connect Mel with your existing communication platforms.',
     },
     {
-      heading: 'Customize',
-      description: 'Set up user roles and permissions.',
+      heading: 'Train',
+      description: "Provide company-specific information to enhance Mel's AI.",
     },
     {
-      heading: 'Start Chatting',
+      heading: 'Launch',
       description:
-        'Employees can now interact with Mel for instant HR support.',
+        'Introduce Mel to your team and start revolutionizing your HR processes.',
     },
   ]
 
   const painPoints = [
     {
       emoji: '⏳',
-      title: 'Time-Consuming HR Tasks',
+      title: 'Time-Consuming HR Processes',
     },
     {
       emoji: '😤',
-      title: 'Employee Frustration',
+      title: 'Employee Dissatisfaction',
     },
     {
       emoji: '📉',
-      title: 'Productivity Losses',
+      title: 'Inefficient Resource Allocation',
+    },
+    {
+      emoji: '❓',
+      title: 'Inconsistent Policy Implementation',
+    },
+    {
+      emoji: '📊',
+      title: 'Lack of Actionable HR Insights',
     },
   ]
 
@@ -234,52 +261,52 @@ export default function LandingPage() {
   return (
     <LandingContainer navItems={navItems}>
       <LandingHero
-        title="Revolutionize Your HR Processes with Mel"
-        subtitle="Instant, Accurate, and Efficient HR Support at Your Fingertips"
-        buttonText="Get Started"
+        title="Transform Your HR with AI-Powered Mel"
+        subtitle="Streamline Processes, Boost Efficiency, and Enhance Employee Experience"
+        buttonText="Start Free Trial"
         pictureUrl="https://marblism-dashboard-api--production-public.s3.us-west-1.amazonaws.com/cmu2QU-melthehr-gwAm"
         socialProof={
           <LandingSocialRating
             avatarItems={avatarItems}
-            numberOfUsers={1000}
-            suffixText="from happy users"
+            numberOfUsers={10000}
+            suffixText="satisfied users worldwide"
           />
         }
       />
-      <LandingSocialProof logos={logos} title="Featured on" />
+      <LandingSocialProof logos={logos} title="Trusted By" />
       <LandingPainPoints
-        title="HR Challenges Impacting Your Business"
+        title="Common HR Challenges Solved by Mel"
         painPoints={painPoints}
       />
-      <LandingHowItWorks title="How Mel Works" steps={steps} />
       <LandingFeatures
         id="features"
-        title="Achieve Seamless HR Operations with Mel"
-        subtitle="Empower Your HR Team and Enhance Employee Satisfaction"
+        title="Revolutionize Your HR Operations"
+        subtitle="Harness the Power of AI to Transform Your Workplace"
         features={features}
       />
+      <LandingHowItWorks title="Getting Started with Mel" steps={steps} />
       <LandingTestimonials
         id="testimonials"
-        title="What Our Customers Are Saying"
-        subtitle="Real Stories of Transformation and Success"
+        title="Success Stories from HR Leaders"
+        subtitle="See How Mel is Transforming HR Departments Worldwide"
         testimonials={testimonials}
       />
       <LandingPricing
         id="pricing"
-        title="Flexible Pricing to Suit Your Needs"
-        subtitle="Choose a Plan That Works Best for Your Business"
+        title="Choose the Perfect Plan for Your Team"
+        subtitle="Scalable Solutions for Businesses of All Sizes"
         packages={packages}
       />
       <LandingFAQ
         id="faq"
         title="Frequently Asked Questions"
-        subtitle="Get Answers to Common Queries"
+        subtitle="Everything You Need to Know About Mel"
         questionAnswers={questionAnswers}
       />
       <LandingCTA
-        title="Ready to Transform Your HR Processes?"
-        subtitle="Sign up now and experience the efficiency of Mel"
-        buttonText="Get Started"
+        title="Ready to Revolutionize Your HR?"
+        subtitle="Join thousands of companies already benefiting from Mel"
+        buttonText="Start Free Trial"
         buttonLink="/register"
       />
     </LandingContainer>
