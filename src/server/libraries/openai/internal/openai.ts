@@ -14,6 +14,7 @@ enum OpenaiModel {
 
 export class Openai {
   private api: OpenaiSDK
+  private assistantApi: OpenaiSDK
   private exampleAssistantId: any
 
   constructor() {
@@ -24,6 +25,7 @@ export class Openai {
     try {
       const apiKey = process.env.SERVER_OPENAI_API_KEY
       const exampleAssistantId = process.env.TEST_ASSISTANT_PMF_HB_ID
+      const assistKey = process.env.ASSISTANT_API_KEY
 
       if (!apiKey) {
         console.log(`Set SERVER_OPENAI_API_KEY in your .env to activate OpenAI`)
@@ -36,6 +38,7 @@ export class Openai {
         return
       }
 
+      this.assistantApi = new OpenaiSDK({ apiKey: assistKey })
       this.api = new OpenaiSDK({ apiKey })
       this.exampleAssistantId = exampleAssistantId
 
@@ -78,7 +81,7 @@ export class Openai {
       prompt,
     })
     const messages = this.buildMessages(prompt, attachmentUrls)
-    const thread = await this.api.beta.threads.create({
+    const thread = await this.assistantApi.beta.threads.create({
       messages,
     })
     let threadId = thread.id
@@ -91,15 +94,20 @@ export class Openai {
     //   instructions: 'You are working in the HR department.',
     //   // tools = [],
     // })
-    const run = await this.api.beta.threads.runs.createAndPoll(thread.id, {
-      assistant_id: this.exampleAssistantId,
-      //assistant_id: assistant.id,
-    })
+    const run = await this.assistantApi.beta.threads.runs.createAndPoll(
+      thread.id,
+      {
+        assistant_id: this.exampleAssistantId,
+        //assistant_id: assistant.id,
+      },
+    )
 
     console.log('Run finished with status: ' + run.status)
 
     if (run.status == 'completed') {
-      const messages = await this.api.beta.threads.messages.list(thread.id)
+      const messages = await this.assistantApi.beta.threads.messages.list(
+        thread.id,
+      )
       const paginatedMsgs = messages.getPaginatedItems()
       return paginatedMsgs[0]?.content[0]?.text?.value
       // for (const message of messages.getPaginatedItems()) {
