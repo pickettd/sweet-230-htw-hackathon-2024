@@ -13,6 +13,14 @@ from dotenv import load_dotenv
 load_dotenv()
 # IMPORTANT: Remember to create a .env variable containing: OPENAI_API_KEY=sk-xyz where xyz is your key
 
+#dataSetStr = "fiqa"
+
+# dataSetStr = "scifact"
+
+dataSetStr = "trec-covid"
+
+theAssistantName = "RAGAS-"+dataSetStr
+
 
 client = OpenAI()
 
@@ -24,19 +32,19 @@ class OpenAITimeoutException(Exception):
     pass
 
 knowledge_datas_path = './knowledge_datas'
-fiqa_path = os.path.join(knowledge_datas_path, 'fiqa_doc.txt')
+txt_doc_path = os.path.join(knowledge_datas_path, dataSetStr+'_doc.txt')
 
-# looks updated
+# looks outdated
 # file = client.files.create(
 #     file=open(fiqa_path, "rb"),
 #     purpose='assistants'
 # )
 
 # Create a vector store caled "Financial Statements"
-vector_store = client.beta.vector_stores.create(name="fiqa_doc")
+vector_store = client.beta.vector_stores.create(name=dataSetStr+"_doc")
  
 # Ready the files for upload to OpenAI
-file_paths = [fiqa_path]
+file_paths = [txt_doc_path]
 file_streams = [open(path, "rb") for path in file_paths]
  
 # Use the upload and poll SDK helper to upload the files, add them to the vector store,
@@ -51,11 +59,12 @@ print(file_batch.file_counts)
 
 # Add the file to the assistant
 assistant = client.beta.assistants.create(
-    instructions="You are a customer support chatbot. You must use your retrieval tool to retrieve relevant knowledge to best respond to customer queries.",
+    instructions="You are a customer support chatbot. You must use your file_search tool to retrieve relevant knowledge to best respond to customer queries.",
     model="gpt-4o-mini",
-    name= "RAGAS-fiqa",
+    name= theAssistantName,
     tools=[{"type": "file_search"}],
     tool_resources={"file_search": {"vector_store_ids": [vector_store.id]}}
 )
 print('Assistant created')
+print('Named: '+theAssistantName)
 print(assistant.id)

@@ -2,6 +2,7 @@
 # with modifications/tweaks for current package versions
 import nest_asyncio
 import os
+from pathlib import Path
 import openai
 from dotenv import load_dotenv
 
@@ -30,7 +31,7 @@ from langchain_openai import OpenAIEmbeddings
 from langchain_ollama import OllamaEmbeddings
 from langchain_ollama import ChatOllama
 
-useAllOpenAI = False
+useAllOpenAI = True
 chatModelName = "gpt-4o-mini"
 embedModelName = "text-embedding-3-small"
 
@@ -51,7 +52,7 @@ else:
     )
 
 
-loader = TextLoader("./nyc_wikipedia/nyc_text.txt")
+loader = TextLoader(Path("nyc_wikipedia/nyc_text.txt"), autodetect_encoding=True)
 index = VectorstoreIndexCreator(embedding=embeddings,vectorstore_cls=InMemoryVectorStore).from_loaders([loader])
 
 

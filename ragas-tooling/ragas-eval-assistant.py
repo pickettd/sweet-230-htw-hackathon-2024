@@ -17,13 +17,35 @@ from dotenv import load_dotenv
 load_dotenv()
 # IMPORTANT: Remember to create a .env variable containing: OPENAI_API_KEY=sk-xyz where xyz is your key
 
+# fiqa is "dev", "test", "train"
+# scifact is "test", "train"
+# trec-covid is "test"
+
+# dataSetStr = "fiqa"
+# splits = ["dev", "test", "train"]
+# corpusIdType = 'int'
+# assistantEnvVarStr = "OPENAI_FIQAT_ASSISTANT_ID"
+
+# dataSetStr = "scifact"
+# splits = ["test", "train"]
+# corpusIdType = 'int'
+# assistantEnvVarStr = "OPENAI_SCIFACT_ASSISTANT_ID"
+
+dataSetStr = "trec-covid"
+splits = ["test"]
+corpusIdType = 'str'
+assistantEnvVarStr = "OPENAI_TREC_COVID_ASSISTANT_ID"
+
 
 client = OpenAI()
 
 # Set OPENAI_API_KEY in your environment value
 client.api_key = os.getenv('OPENAI_API_KEY')
 
-assistant_id = "asst_hlrYqC4aFiveBrMIkjs1zx94"
+assistant_id = os.getenv(assistantEnvVarStr)
+theAssistantName = "RAGAS-"+dataSetStr
+
+
 
 
 class OpenAITimeoutException(Exception):
@@ -95,8 +117,8 @@ def get_answer_contexts_from_assistant(question, assistant_id, timeout_seconds=1
         print(e)
     return res, contexts
 
-def prepare_fiqa_without_answer(knowledge_path):
-    dataset_name = "fiqa"
+def prepare_dataset_without_answer(knowledge_path):
+    dataset_name = dataSetStr
 
     if not os.path.exists(os.path.join(knowledge_path, f'{dataset_name}.zip')):
         url = (
@@ -106,7 +128,7 @@ def prepare_fiqa_without_answer(knowledge_path):
         )
         util.download_and_unzip(url, knowledge_path)
 
-    data_path = os.path.join(knowledge_path, 'fiqa')
+    data_path = os.path.join(knowledge_path, dataSetStr)
     with open(os.path.join(data_path, "corpus.jsonl")) as f:
         cs = [pd.Series(json.loads(l)) for l in f.readlines()]
 
@@ -114,7 +136,7 @@ def prepare_fiqa_without_answer(knowledge_path):
 
     corpus_df = corpus_df.rename(columns={"_id": "corpus-id", "text": "ground_truth"})
     corpus_df = corpus_df.drop(columns=["title", "metadata"])
-    corpus_df["corpus-id"] = corpus_df["corpus-id"].astype(int)
+    corpus_df["corpus-id"] = corpus_df["corpus-id"].astype(corpusIdType)
     corpus_df.head()
 
     with open(os.path.join(data_path, "queries.jsonl")) as f:
@@ -126,7 +148,6 @@ def prepare_fiqa_without_answer(knowledge_path):
     queries_df["query-id"] = queries_df["query-id"].astype(int)
     queries_df.head()
 
-    splits = ["dev", "test", "train"]
     split_df = {}
     for s in splits:
         split_df[s] = pd.read_csv(os.path.join(data_path, f"qrels/{s}.tsv"), sep="\t").drop(
@@ -144,42 +165,45 @@ def prepare_fiqa_without_answer(knowledge_path):
                     "question": x["question"].sample().values[0],
                     "ground_truths": x["ground_truth"].tolist(),
                 }
-            )
+            ),
+            include_groups=False
         )
 
-        grouped = grouped.reset_index()
-        grouped = grouped.drop(columns="query-id")
         final_split_df[split] = grouped
 
     return final_split_df
 
 
+
 knowledge_datas_path = './knowledge_datas'
-fiqa_path = os.path.join(knowledge_datas_path, 'fiqa_doc.txt')
+txt_doc_path = os.path.join(knowledge_datas_path, dataSetStr+'_doc.txt')
 
 if not os.path.exists(knowledge_datas_path):
     os.mkdir(knowledge_datas_path)
 contexts_list = []
 answer_list = []
 
-final_split_df = prepare_fiqa_without_answer(knowledge_datas_path)
+final_split_df = prepare_dataset_without_answer(knowledge_datas_path)
 
 docs = []
 
 split = 'test'
 for ds in final_split_df[split]["ground_truths"]:
     docs.extend([d for d in ds])
+print("Length of "+dataSetStr+" dataset docs:")
 print(len(docs))
 
 docs_str = '\n'.join(docs)
-with open(fiqa_path, 'w') as f:
-    f.write(docs_str)
+with open(txt_doc_path, 'w') as f:
+    f.write("%s"% docs_str.encode('utf-8'))
 
 split = 'test'
 question_list = final_split_df[split]["question"].to_list()
 ground_truth_list = final_split_df[split]["ground_truths"].to_list()
 
-for question in tqdm(question_list):
+print("Now generating answers from assistant")
+justOneQuestion = question_list[0]
+for question in tqdm([justOneQuestion]):
     answer, contexts = get_answer_contexts_from_assistant(question, assistant_id)
     # print(f'answer = {answer}')
     # print(f'contexts = {contexts}')
@@ -196,12 +220,13 @@ result = evaluate(
     ds,
     metrics=[
         context_precision,
-        # context_recall,
-        # faithfulness,
-        # answer_relevancy,
+        context_recall,
+        faithfulness,
+        answer_relevancy,
         # answer_similarity,
         # answer_correctness,
     ],
 
 )
+print("Completed running eval on "+theAssistantName+" with dataset: "+ dataSetStr)
 print(result)
