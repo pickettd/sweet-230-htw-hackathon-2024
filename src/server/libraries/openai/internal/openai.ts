@@ -44,6 +44,7 @@ export class Openai {
 
       console.log(`Openai is active`)
     } catch (error) {
+      console.error(error)
       console.error(`Openai failed to start`)
     }
   }
