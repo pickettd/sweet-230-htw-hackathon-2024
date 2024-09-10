@@ -1,7 +1,7 @@
+import { Typography } from 'antd'
 import { HTMLAttributes, ReactNode } from 'react'
 import { DesignSystemUtility } from '../helpers/utility'
 import LandingButton from './LandingButton'
-import { Typography } from 'antd'
 
 const { Title, Paragraph } = Typography
 

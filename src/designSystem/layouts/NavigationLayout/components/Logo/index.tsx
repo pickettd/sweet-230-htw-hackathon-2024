@@ -21,7 +21,7 @@ export const Logo: React.FC<Props> = ({
   return (
     <Flex align="center" gap={10}>
       <img
-        src="https://marblism-dashboard-api--production-public.s3.us-west-1.amazonaws.com/cmu2QU-melthehr-vwpn"
+        src="../Images/MelBotLogo.svg"
         height={height}
         style={{
           borderRadius: '5px',
@@ -34,9 +34,10 @@ export const Logo: React.FC<Props> = ({
         onClick={() => goTo('/home')}
       />
       {isLabel && (
-        <Typography.Title level={4} style={{ margin: '0px' }}>
-          Mel the HR
-        </Typography.Title>
+        <Typography.Title
+          level={4}
+          style={{ margin: '0px' }}
+        ></Typography.Title>
       )}
     </Flex>
   )

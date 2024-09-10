@@ -1,15 +1,7 @@
 'use client'
-import { LandingCTA } from '@/designSystem/landing/LandingCTA'
 import { LandingContainer } from '@/designSystem/landing/LandingContainer'
-import LandingFAQ from '@/designSystem/landing/LandingFAQ'
-import { LandingFeatures } from '@/designSystem/landing/LandingFeatures'
 import { LandingHero } from '@/designSystem/landing/LandingHero'
-import { LandingHowItWorks } from '@/designSystem/landing/LandingHowItWorks'
-import { LandingPainPoints } from '@/designSystem/landing/LandingPainPoints'
-import { LandingPricing } from '@/designSystem/landing/LandingPricing'
-import { LandingSocialProof } from '@/designSystem/landing/LandingSocialProof'
 import { LandingSocialRating } from '@/designSystem/landing/LandingSocialRating'
-import { LandingTestimonials } from '@/designSystem/landing/LandingTestimonials'
 import {
   ApiOutlined,
   BarChartOutlined,
@@ -273,7 +265,7 @@ export default function LandingPage() {
           />
         }
       />
-      <LandingSocialProof logos={logos} title="Trusted By" />
+      {/* <LandingSocialProof logos={logos} title="Trusted By" />
       <LandingPainPoints
         title="Common HR Challenges Solved by Mel"
         painPoints={painPoints}
@@ -308,7 +300,7 @@ export default function LandingPage() {
         subtitle="Join thousands of companies already benefiting from Mel"
         buttonText="Start Free Trial"
         buttonLink="/register"
-      />
+      /> */}
     </LandingContainer>
   )
 }
