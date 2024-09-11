@@ -1,6 +1,7 @@
 import crypto from 'crypto'
 //import { sendGPTResponse } from './_chat'
 import { WebClient } from '@slack/web-api'
+import { RagService } from '../../server/libraries/rag'
 
 const slack = new WebClient(process.env.SLACK_BOT_TOKEN)
 
@@ -43,10 +44,16 @@ export default async function POST(request: Request, res) {
         const msgText = slackEvent.text
         console.log('This is the IM Message from Slack', msgText)
 
+        const answer = await RagService.query(
+          msgText,
+          [],
+          [],
+        )
+
         await slack.chat.postMessage({
           channel: slackEvent.channel,
           thread_ts: slackEvent.ts,
-          text: `Hello from Marblism!`,
+          text: answer,
         })
         return res.status(200).json('Success!')
       }
