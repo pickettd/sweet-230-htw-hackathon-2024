@@ -20,8 +20,6 @@ import mammoth from 'mammoth'
 import Papaparse from 'papaparse'
 import PdfParse from 'pdf-parse'
 
-import { App } from '@slack/bolt'
-
 const downloadFile = async (url: string) => {
   try {
     const response = await axios.get(url, { responseType: 'arraybuffer' })
@@ -184,47 +182,6 @@ class Service {
   private pathStorage = FileHelper.getRoot() + `/tmp/rag/vectors`
 
   private vectorStore: HNSWLib
-
-  public slackApp
-
-  constructor() {
-    this.initSlack()
-  }
-
-  async initSlack() {
-    this.slackApp = new App({
-      token: process.env.SLACK_BOT_TOKEN,
-      signingSecret: process.env.SLACK_SIGNING_SECRET,
-      socketMode: true,
-      appToken: process.env.SLACK_APP_TOKEN,
-      // Socket Mode doesn't listen on a port, but in case you want your app to respond to OAuth,
-      // you still need to listen on some port!
-      port: Number(process.env.PORT) || 3000,
-    })
-
-    // Listens to incoming messages that contain "hello"
-    this.slackApp.message('hello', async ({ message, say }) => {
-      // Filter out message events with subtypes (see https://api.slack.com/events/message)
-      if (message.subtype === undefined || message.subtype === 'bot_message') {
-        // say() sends a message to the channel where the event was triggered
-        await say({
-          blocks: [
-            {
-              type: 'section',
-              text: {
-                type: 'mrkdwn',
-                text: `Hey there <@${message.user}>!`,
-              },
-            },
-          ],
-          text: `Hey there <@${message.user}>!`,
-        })
-      }
-    })
-    await this.slackApp.start()
-
-    console.log('⚡️ Slack Bolt app is running!')
-  }
 
   async createAndSaveFile(url: string, tags: string[] = []) {
     const key = createHash(url)
