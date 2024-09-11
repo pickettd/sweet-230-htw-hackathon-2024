@@ -34,7 +34,7 @@
     "@langchain/openai": "^0.2.1",
     "@mapbox/mapbox-sdk": "^0.16.0",
     "@prisma/client": "5.15.1",
-    "@slack/bolt": "^3.21.2",
+    "@slack/web-api": "^7.4.0",
     "@tailwindcss/typography": "^0.5.13",
     "@tanstack/react-query": "^4.36.1",
     "@tanstack/react-query-devtools": "^4.36.1",

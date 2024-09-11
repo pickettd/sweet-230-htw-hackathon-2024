@@ -14,6 +14,9 @@ const appRouter = Trpc.mergeRouters(
 
   // the custom router, add your own routers here
   Trpc.createRouter({
+    // Can create static routes like this
+    greeting: Trpc.procedurePublic.query(() => 'example hello!'),
+
     ai: AiRouter,
     authentication: AuthenticationRouter,
 
