@@ -3,6 +3,7 @@
 import { useUserContext } from '@/core/context'
 import { Api } from '@/core/trpc'
 import { PageLayout } from '@/designSystem/layouts/Page.layout'
+import { Product } from '@/server/libraries/payment'
 import { SendOutlined } from '@ant-design/icons'
 import { Button, Col, Input, List, Row, Typography } from 'antd'
 import dayjs from 'dayjs'
@@ -20,6 +21,21 @@ export default function ChatbotInteractionPage() {
   const [chatHistory, setChatHistory] = useState<
     { question: string; answer: string; timestamp: number }[]
   >([])
+  const { data: products } = Api.billing.findManyProducts.useQuery(
+    {},
+    { initialData: [] },
+  )
+  const { data: subscriptions } = Api.billing.findManySubscriptions.useQuery(
+    {
+      organizationId: params.organizationId,
+    },
+    { initialData: [] },
+  )
+  const isSubscribed = (product: Product) => {
+    return subscriptions.find(
+      subscription => subscription.productId === product.id,
+    )
+  }
 
   const { mutateAsync: generateAssistantText } =
     Api.ai.generateAssistantText.useMutation()

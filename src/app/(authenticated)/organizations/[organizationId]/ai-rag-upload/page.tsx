@@ -1,16 +1,16 @@
 'use client'
 
-import { useState } from 'react'
-import { Typography, Upload, Button, List, Spin, Row, Col } from 'antd'
-import { UploadOutlined, DeleteOutlined } from '@ant-design/icons'
-const { Title, Text } = Typography
 import { useUserContext } from '@/core/context'
-import { useRouter, useParams } from 'next/navigation'
 import { useUploadPublic } from '@/core/hooks/upload'
-import { useSnackbar } from 'notistack'
-import dayjs from 'dayjs'
 import { Api } from '@/core/trpc'
 import { PageLayout } from '@/designSystem/layouts/Page.layout'
+import { Product } from '@/server/libraries/payment'
+import { DeleteOutlined, UploadOutlined } from '@ant-design/icons'
+import { Button, Col, List, Row, Spin, Typography, Upload } from 'antd'
+import { useParams, useRouter } from 'next/navigation'
+import { useSnackbar } from 'notistack'
+import { useState } from 'react'
+const { Title, Text } = Typography
 
 export default function AIRAGFileUploadPage() {
   const router = useRouter()
@@ -18,6 +18,21 @@ export default function AIRAGFileUploadPage() {
   const { user } = useUserContext()
   const { enqueueSnackbar } = useSnackbar()
   const [fileList, setFileList] = useState<any[]>([])
+  const { data: products } = Api.billing.findManyProducts.useQuery(
+    {},
+    { initialData: [] },
+  )
+  const { data: subscriptions } = Api.billing.findManySubscriptions.useQuery(
+    {
+      organizationId: params.organizationId,
+    },
+    { initialData: [] },
+  )
+  const isSubscribed = (product: Product) => {
+    return subscriptions.find(
+      subscription => subscription.productId === product.id,
+    )
+  }
 
   const {
     data: files,
