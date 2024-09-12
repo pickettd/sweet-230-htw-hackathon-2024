@@ -36,6 +36,15 @@ export default function ChatbotInteractionPage() {
       subscription => subscription.productId === product.id,
     )
   }
+  const isAnySubscribed = () => {
+    return (
+      subscriptions.find(
+        subscription =>
+          subscription.status === 'active' ||
+          subscription.status === 'trialing',
+      ) !== undefined
+    )
+  }
 
   const { mutateAsync: generateAssistantText } =
     Api.ai.generateAssistantText.useMutation()

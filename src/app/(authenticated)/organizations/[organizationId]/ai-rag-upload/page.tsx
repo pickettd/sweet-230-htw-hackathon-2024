@@ -34,6 +34,16 @@ export default function AIRAGFileUploadPage() {
     )
   }
 
+  const isAnySubscribed = () => {
+    return (
+      subscriptions.find(
+        subscription =>
+          subscription.status === 'active' ||
+          subscription.status === 'trialing',
+      ) !== undefined
+    )
+  }
+
   const {
     data: files,
     isLoading,
