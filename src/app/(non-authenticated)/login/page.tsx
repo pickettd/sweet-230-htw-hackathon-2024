@@ -1,5 +1,6 @@
 'use client'
 
+import { generateSlackOAuthUrl } from '@/core/authentication/slackOAuth'
 import { Configuration } from '@/core/configuration'
 import { AppHeader } from '@/designSystem/ui/AppHeader'
 import { Button, Flex, Form, Input, Typography } from 'antd'
@@ -56,6 +57,13 @@ export default function LoginPage() {
 
       setLoading(false)
     }
+  }
+
+  const handleSlackLogin = () => {
+    const slackOAuthUrl = generateSlackOAuthUrl(
+      `${window.location.origin}/api/auth/callback/slack`,
+    )
+    window.location.href = slackOAuthUrl
   }
 
   return (
@@ -119,6 +127,10 @@ export default function LoginPage() {
             </Button>
           </Form.Item>
         </Form>
+
+        <Button onClick={handleSlackLogin} block>
+          Login with Slack
+        </Button>
 
         <Button
           ghost

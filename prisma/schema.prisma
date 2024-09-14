@@ -60,6 +60,8 @@ model User {
   roles             Role[]
   organizationRoles OrganizationRole[]
   questions         Question[]         @relation("user")
+  slackUserId       String?
+  slackBotToken     String?
 }
 
 /// @@allow('all', auth().id == user.id)
