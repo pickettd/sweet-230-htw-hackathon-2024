@@ -32,13 +32,9 @@ model User {
     
     organizationRoles OrganizationRole[]
 
-    questions  Question[]  @relation("user")  
-
-    slackUserId        String?
-    slackBotToken      String?
+questions  Question[]  @relation("user")  
 
 @@auth()
-
     @@allow("all", auth().id == this.id)
     @@allow('all', auth().roles?[name == 'admin'])
     @@allow("create", true)
