@@ -12,6 +12,8 @@ import "./answer.zmodel";
 
 import "./billingData.zmodel"; 
 
+import "./slackAppInstallation.zmodel"; 
+
 generator client {
     provider = "prisma-client-js"
 }
