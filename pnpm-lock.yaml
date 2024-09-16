@@ -36,10 +36,13 @@ importers:
         specifier: 5.15.1
         version: 5.15.1(prisma@5.15.1)
       '@seratch_/bolt-http-runner':
-        specifier: ^1.0.0
+        specifier: ^1.0.5
         version: 1.0.5
+      '@seratch_/bolt-prisma':
+        specifier: ^1.0.5
+        version: 1.0.5(prisma@5.15.1)
       '@slack/bolt':
-        specifier: ^3.12.2
+        specifier: ^3.21.4
         version: 3.21.4
       '@slack/web-api':
         specifier: ^7.4.0
@@ -1319,6 +1322,15 @@ packages:
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
 
+  '@prisma/client@3.15.2':
+    resolution: {integrity: sha512-ErqtwhX12ubPhU4d++30uFY/rPcyvjk+mdifaZO5SeM21zS3t4jQrscy8+6IyB0GIYshl5ldTq6JSBo1d63i8w==}
+    engines: {node: '>=12.6'}
+    peerDependencies:
+      prisma: '*'
+    peerDependenciesMeta:
+      prisma:
+        optional: true
+
   '@prisma/client@5.15.1':
     resolution: {integrity: sha512-fmZRGmsUJ9+VwC/AvfP/PwdpD0xAEyPvNsD9/B3+GYpETq9VejVRT3PiqNvl76q1uYYzNZeo8u/LmzzTetHSEg==}
     engines: {node: '>=16.13'}
@@ -1333,6 +1345,9 @@ packages:
 
   '@prisma/debug@5.17.0':
     resolution: {integrity: sha512-l7+AteR3P8FXiYyo496zkuoiJ5r9jLQEdUuxIxNCN1ud8rdbH3GTxm+f+dCyaSv9l9WY+29L9czaVRXz9mULfg==}
+
+  '@prisma/engines-version@3.15.1-1.461d6a05159055555eb7dfb337c9fb271cbd4d7e':
+    resolution: {integrity: sha512-e3k2Vd606efd1ZYy2NQKkT4C/pn31nehyLhVug6To/q8JT8FpiMrDy7zmm3KLF0L98NOQQcutaVtAPhzKhzn9w==}
 
   '@prisma/engines-version@5.15.1-1.5675a3182f972f1a8f31d16eee6abf4fd54910e3':
     resolution: {integrity: sha512-7csphKGCG6n/cN1MkT1mJvQ78Ir18IknlYZ8eyEoLKdQBb0HscR/6TyPmzqrMA7Rz01K1KeXqctwAqxtA/lKQg==}
@@ -1433,6 +1448,9 @@ packages:
 
   '@seratch_/bolt-http-runner@1.0.5':
     resolution: {integrity: sha512-DKHObJhThUWW07QHV/e1flO5+ZKanKbt023bNW62J19Gz5x8x90txoB7jRXmLziw/pPBEWS4YwkrOYUdUsYCHA==}
+
+  '@seratch_/bolt-prisma@1.0.5':
+    resolution: {integrity: sha512-AigDdu6IlsZa9w4nRSeizJVmwHBMrhulSPdA8gc9UGbLHQmxJTVhCdPJeOa8TIDMoZUJE/MTlQItUojoo997xg==}
 
   '@sindresorhus/is@4.6.0':
     resolution: {integrity: sha512-t09vSN3MdfsyCHoFcTRCH/iUtG7OJ0CsjzB8cjAmKc/va/kIgeDI/TxsigdncE/4be734m0cvIYwNaV4i2XqAw==}
@@ -6906,6 +6924,12 @@ snapshots:
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
+  '@prisma/client@3.15.2(prisma@5.15.1)':
+    dependencies:
+      '@prisma/engines-version': 3.15.1-1.461d6a05159055555eb7dfb337c9fb271cbd4d7e
+    optionalDependencies:
+      prisma: 5.15.1
+
   '@prisma/client@5.15.1(prisma@5.15.1)':
     optionalDependencies:
       prisma: 5.15.1
@@ -6913,6 +6937,8 @@ snapshots:
   '@prisma/debug@5.15.1': {}
 
   '@prisma/debug@5.17.0': {}
+
+  '@prisma/engines-version@3.15.1-1.461d6a05159055555eb7dfb337c9fb271cbd4d7e': {}
 
   '@prisma/engines-version@5.15.1-1.5675a3182f972f1a8f31d16eee6abf4fd54910e3': {}
 
@@ -7059,6 +7085,16 @@ snapshots:
       - debug
       - supports-color
       - utf-8-validate
+
+  '@seratch_/bolt-prisma@1.0.5(prisma@5.15.1)':
+    dependencies:
+      '@prisma/client': 3.15.2(prisma@5.15.1)
+      '@slack/logger': 3.0.0
+      '@slack/oauth': 2.6.3
+      '@types/node': 17.0.45
+    transitivePeerDependencies:
+      - debug
+      - prisma
 
   '@sindresorhus/is@4.6.0': {}
 
