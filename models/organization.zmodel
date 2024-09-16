@@ -1,10 +1,9 @@
-import "./organizationRole.zmodel";
-
 import './organizationRole.zmodel'
 
 import './question.zmodel'
 
 import './billingData.zmodel'
+import './slackAppInstallation.zmodel'
 
 model Organization {
     id               String             @id @default(uuid())
@@ -19,6 +18,8 @@ model Organization {
 
 questions  Question[]  @relation("organization")  
         billings    BillingData[]  @relation("organization")  
+
+slackAppInstallation  SlackAppInstallation[]  @relation("organization")  
 
 @@allow('all', auth().roles?[name == 'admin'])
     @@allow('all', roles?[user == auth() && name == 'owner'])

@@ -1,4 +1,7 @@
-import crypto from 'crypto'
+// No longer need this file/route but leaving commented out while
+// finishing bolt-based implementation
+
+/*import crypto from 'crypto'
 //import { sendGPTResponse } from './_chat'
 import { WebClient } from '@slack/web-api'
 import { RagService } from '../../server/libraries/rag'
@@ -62,3 +65,4 @@ export default async function POST(request: Request, res) {
 
   return res.status(200).json('OK')
 }
+*/

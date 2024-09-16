@@ -59,6 +59,11 @@ export default function OrganizationSettingsPage() {
 
   return (
     <PageLayout layout="super-narrow">
+      {checkOrganizationRole('owner') && (
+        <Flex justify="center" style={{ marginBottom: '30px' }}>
+          <a href="api/slack/install">Install Melbot to your Slack workspace</a>
+        </Flex>
+      )}
       <Flex justify="center" style={{ marginBottom: '30px' }}>
         <Avatar
           shape="square"
