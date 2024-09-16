@@ -32,21 +32,6 @@ export const appRunner = new AppRunner({
   installationStore
 });
 
-// // Use FileInstallationStore
-// export const appRunner = new AppRunner({
-//   logLevel: LogLevel.DEBUG,
-//   // token: process.env.SLACK_BOT_TOKEN,
-//   signingSecret: process.env.SLACK_SIGNING_SECRET,
-//   clientId: process.env.SLACK_CLIENT_ID,
-//   clientSecret: process.env.SLACK_CLIENT_SECRET,
-//   stateSecret: process.env.SLACK_STATE_SECRET,
-//   scopes: ["commands", "chat:write", "app_mentions:read"],
-//   installationStore: new FileInstallationStore(),
-//   installerOptions: {
-//     stateStore: new FileStateStore({}),
-//   },
-// });
-
 const app = new App(appRunner.appOptions());
 
 app.event("app_mention", async ({ say }) => {
