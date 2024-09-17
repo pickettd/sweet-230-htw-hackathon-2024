@@ -7,6 +7,7 @@ import { Utility } from '@/core/helpers/utility'
 import { Api } from '@/core/trpc'
 import { PageLayout } from '@/designSystem'
 import { User } from '@prisma/client'
+import Link from 'next/link'
 import { useSnackbar } from 'notistack'
 import { useEffect } from 'react'
 
@@ -61,7 +62,9 @@ export default function OrganizationSettingsPage() {
     <PageLayout layout="super-narrow">
       {checkOrganizationRole('owner') && (
         <Flex justify="center" style={{ marginBottom: '30px' }}>
-          <a href="api/slack/install">Install Melbot to your Slack workspace</a>
+          <Link target="_blank" href="/api/slack/install">
+            Install Melbot to your Slack workspace
+          </Link>
         </Flex>
       )}
       <Flex justify="center" style={{ marginBottom: '30px' }}>
