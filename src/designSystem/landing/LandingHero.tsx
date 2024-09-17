@@ -42,14 +42,11 @@ export const LandingHero: React.FC<Props> = ({
             {subtitle}
           </Paragraph>
           <div className="flex justify-center lg:justify-start">
-            <LandingButton
-              href={'/login'}
-              className="bg-white text-primary hover:bg-white/90"
-              size="large"
-            >
+            <LandingButton href={'/login'} size="large">
               {buttonText}
             </LandingButton>
           </div>
+
           {socialProof && <div className="mt-8">{socialProof}</div>}
         </div>
 

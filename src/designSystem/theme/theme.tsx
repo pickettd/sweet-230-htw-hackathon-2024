@@ -1,28 +1,24 @@
 import { theme } from 'antd'
-import { Inter } from 'next/font/google'
-
-const interFont = Inter({
-  subsets: ['latin'],
-})
 
 export const Theme = {
   algorithm: theme.defaultAlgorithm,
   token: {
     // Colors
-    colorPrimary: 'black',
+    colorPrimary: '#42436B',
     colorError: '#ff4d4f',
     colorInfo: '#1677ff',
     colorSuccess: '#52c41a',
     colorWarning: '#faad14',
-    colorTextBase: 'black',
-    colorLink: 'black',
-    colorBgBase: 'white',
-    colorBgContainer: 'white',
+    colorTextBase: '#42436B',
+    colorLink: '#42436B',
+    colorBgBase: '#ff9678',
+    colorBgContainer: '#ff9678',
     colorBorder: '#d4d4d8',
     colorBorderSecondary: '#e4e4e7',
     colorSplit: 'rgba(24, 24, 27, 0.07)',
     // Typography
-    fontFamily: `${interFont.style.fontFamily}, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial`,
+    fontFamily: `'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif`,
+
     fontSize: 14,
     fontSizeHeading1: 38,
     fontSizeHeading2: 30,
@@ -75,7 +71,9 @@ export const Theme = {
     },
     Button: {
       paddingInlineSM: 11,
-      fontWeight: 500,
+      fontWeight: 700,
+      background: '#F2EE7D',
+      color: '#42436B',
     },
   },
 }

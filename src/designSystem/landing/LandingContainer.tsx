@@ -9,11 +9,13 @@ interface Props extends HTMLAttributes<HTMLElement> {
     target?: '_blank'
   }[]
   children: React.ReactNode
+  showFooter?: boolean
 }
 
 export const LandingContainer: React.FC<Props> = ({
   navItems,
   children,
+  showFooter = true,
   ...props
 }) => {
   return (
@@ -21,8 +23,8 @@ export const LandingContainer: React.FC<Props> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <LandingNavBar navItems={navItems} />
         {children}
-        <LandingFooter />
       </div>
+      <LandingFooter />
     </main>
   )
 }

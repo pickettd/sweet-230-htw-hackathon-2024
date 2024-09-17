@@ -1,7 +1,5 @@
 'use client'
 import { LandingContainer } from '@/designSystem/landing/LandingContainer'
-import { LandingHero } from '@/designSystem/landing/LandingHero'
-import { LandingSocialRating } from '@/designSystem/landing/LandingSocialRating'
 import {
   ApiOutlined,
   BarChartOutlined,
@@ -252,7 +250,7 @@ export default function LandingPage() {
 
   return (
     <LandingContainer navItems={navItems}>
-      <LandingHero
+      {/*<LandingHero
         title="Transform Your HR with AI-Powered Mel"
         subtitle="Streamline Processes, Boost Efficiency, and Enhance Employee Experience"
         buttonText="Start Free Trial"
@@ -265,7 +263,7 @@ export default function LandingPage() {
           />
         }
       />
-      {/* <LandingSocialProof logos={logos} title="Trusted By" />
+      <LandingSocialProof logos={logos} title="Trusted By" />
       <LandingPainPoints
         title="Common HR Challenges Solved by Mel"
         painPoints={painPoints}
@@ -294,13 +292,7 @@ export default function LandingPage() {
         title="Frequently Asked Questions"
         subtitle="Everything You Need to Know About Mel"
         questionAnswers={questionAnswers}
-      />
-      <LandingCTA
-        title="Ready to Revolutionize Your HR?"
-        subtitle="Join thousands of companies already benefiting from Mel"
-        buttonText="Start Free Trial"
-        buttonLink="/register"
-      /> */}
+      />*/}
     </LandingContainer>
   )
 }

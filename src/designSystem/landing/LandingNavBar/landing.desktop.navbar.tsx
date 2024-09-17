@@ -4,7 +4,6 @@ import { Logo } from '@/designSystem/layouts/NavigationLayout/components/Logo'
 import { useUserContext } from '@/core/context'
 import { ArrowRightOutlined } from '@ant-design/icons'
 import LandingButton from '../LandingButton'
-import { LandingNavBarItem } from './landing.navbar.items'
 
 type Props = {
   navItems: {
@@ -21,7 +20,7 @@ export const LandingDesktopNavbar = ({ navItems }: Props) => {
     <div className="w-full flex relative justify-between px-4 py-2 rounded-full bg-transparent transition duration-200">
       <div className="flex flex-row gap-2 items-center">
         <Logo isLabel height={40} />
-        <div className="flex items-center gap-1.5 pl-8">
+        {/*<div className="flex items-center gap-1.5 pl-8">
           {navItems.map(item => (
             <LandingNavBarItem
               href={item.link}
@@ -31,7 +30,7 @@ export const LandingDesktopNavbar = ({ navItems }: Props) => {
               {item.title}
             </LandingNavBarItem>
           ))}
-        </div>
+        </div>*/}
       </div>
       <div className="flex space-x-2 items-center">
         {isLoggedIn && (
@@ -40,8 +39,8 @@ export const LandingDesktopNavbar = ({ navItems }: Props) => {
           </LandingButton>
         )}
         {!isLoggedIn && (
-          <LandingButton size="sm" href="/login">
-            Get Started
+          <LandingButton size="md" href="/login">
+            get started
           </LandingButton>
         )}
       </div>
