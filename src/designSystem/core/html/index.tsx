@@ -16,8 +16,9 @@ export const MrbHtml: React.FC<Props> = ({ children }: Props) => {
       style={{ background: token.colorBgBase, color: token.colorTextBase }}
     >
       <head>
-        <title>Mel the HR</title>
+        <title>melbot</title>
       </head>
+
       <body>{children}</body>
     </html>
   )
