@@ -25,21 +25,21 @@ export const NavigationLayout: React.FC<Props> = ({ children }) => {
   }
 
   const itemsOrganization = [
-    {
-      key: '/organizations/:organizationId/dashboard',
-      label: 'Workspace Dashboard',
-      onClick: () =>
-        goTo(
-          '/organizations/:organizationId/dashboard'.replace(
-            ':organizationId',
-            organization.id,
-          ),
-        ),
-    },
+    // {
+    //   key: '/organizations/:organizationId/dashboard',
+    //   label: 'Workspace Dashboard',
+    //   onClick: () =>
+    //     goTo(
+    //       '/organizations/:organizationId/dashboard'.replace(
+    //         ':organizationId',
+    //         organization.id,
+    //       ),
+    //     ),
+    // },
 
     {
       key: '/organizations/:organizationId/chat',
-      label: 'Chatbot Interaction',
+      label: 'Chat',
       onClick: () =>
         goTo(
           '/organizations/:organizationId/chat'.replace(
@@ -51,7 +51,7 @@ export const NavigationLayout: React.FC<Props> = ({ children }) => {
 
     {
       key: '/organizations/:organizationId/users',
-      label: 'User Management',
+      label: 'Users',
       onClick: () =>
         goTo(
           '/organizations/:organizationId/users'.replace(
@@ -63,7 +63,7 @@ export const NavigationLayout: React.FC<Props> = ({ children }) => {
 
     {
       key: '/organizations/:organizationId/billing',
-      label: 'Billing and Subscription',
+      label: 'Billing',
       onClick: () =>
         goTo(
           '/organizations/:organizationId/billing'.replace(
@@ -75,7 +75,7 @@ export const NavigationLayout: React.FC<Props> = ({ children }) => {
 
     {
       key: '/organizations/:organizationId/ai-rag-upload',
-      label: 'AI RAG File Upload',
+      label: 'Upload',
       onClick: () =>
         goTo(
           '/organizations/:organizationId/ai-rag-upload'.replace(
@@ -85,18 +85,18 @@ export const NavigationLayout: React.FC<Props> = ({ children }) => {
         ),
     },
 
-    {
-      key: '/organizations/:organizationId/pricing',
-      icon: <DollarOutlined />,
-      label: 'Pricing',
-      onClick: () =>
-        goTo(
-          '/organizations/:organizationId/pricing'.replace(
-            ':organizationId',
-            organization.id,
-          ),
-        ),
-    },
+    // {
+    //   key: '/organizations/:organizationId/pricing',
+    //   icon: <DollarOutlined />,
+    //   label: 'Pricing',
+    //   onClick: () =>
+    //     goTo(
+    //       '/organizations/:organizationId/pricing'.replace(
+    //         ':organizationId',
+    //         organization.id,
+    //       ),
+    //     ),
+    // },
   ].filter(_ => !!organization)
 
   const itemsLeftbar = []
@@ -104,7 +104,7 @@ export const NavigationLayout: React.FC<Props> = ({ children }) => {
   const itemsTopbar = [
     {
       key: '/home',
-      label: 'Home Page',
+      label: 'Home',
       onClick: () => goTo('/home'),
     },
 
