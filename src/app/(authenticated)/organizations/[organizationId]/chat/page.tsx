@@ -86,8 +86,8 @@ export default function ChatbotInteractionPage() {
         <Col span={24}>
           <Title level={2}>AI Chatbot</Title>
           <Text>
-            Ask questions about company policies, time off, and benefits. View
-            responses from the AI chatbot. This is loaded with the PMF handbook.
+            Ask Melbot questions about company policies, time off, and benefits. View
+            responses here.
           </Text>
         </Col>
       </Row>

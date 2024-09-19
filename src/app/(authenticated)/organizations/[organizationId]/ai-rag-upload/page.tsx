@@ -97,10 +97,10 @@ export default function AIRAGFileUploadPage() {
     <PageLayout layout="narrow">
       <Row justify="center">
         <Col span={24}>
-          <Title level={2}>AI RAG File Upload</Title>
+          <Title level={2}>File Upload</Title>
           <Text>
-            As an admin, you can upload and manage files to be used in the AI
-            RAG context.
+            Let's get started by adding relevant HR documents such as Benefits, Holiday Schedules, and other policy documents.
+            The information in these documents provides the context needed to make Melbot the most helpful assistant.
           </Text>
         </Col>
       </Row>
