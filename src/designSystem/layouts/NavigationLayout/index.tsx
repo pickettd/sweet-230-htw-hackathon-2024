@@ -50,6 +50,18 @@ export const NavigationLayout: React.FC<Props> = ({ children }) => {
     },
 
     {
+      key: '/organizations/:organizationId/ai-rag-upload',
+      label: 'Upload',
+      onClick: () =>
+        goTo(
+          '/organizations/:organizationId/ai-rag-upload'.replace(
+            ':organizationId',
+            organization.id,
+          ),
+        ),
+    },
+
+    {
       key: '/organizations/:organizationId/users',
       label: 'Users',
       onClick: () =>
@@ -67,18 +79,6 @@ export const NavigationLayout: React.FC<Props> = ({ children }) => {
       onClick: () =>
         goTo(
           '/organizations/:organizationId/billing'.replace(
-            ':organizationId',
-            organization.id,
-          ),
-        ),
-    },
-
-    {
-      key: '/organizations/:organizationId/ai-rag-upload',
-      label: 'Upload',
-      onClick: () =>
-        goTo(
-          '/organizations/:organizationId/ai-rag-upload'.replace(
             ':organizationId',
             organization.id,
           ),
