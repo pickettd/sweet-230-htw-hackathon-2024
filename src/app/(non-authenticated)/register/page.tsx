@@ -20,6 +20,8 @@ export default function RegisterPage() {
 
   const { mutateAsync: registerUser } =
     Api.authentication.register.useMutation()
+  const { mutateAsync: createOrganization } =
+    Api.organization.create.useMutation()
 
   useEffect(() => {
     const email = searchParams.get('email')?.trim()
@@ -35,12 +37,22 @@ export default function RegisterPage() {
     try {
       const tokenInvitation = searchParams.get('tokenInvitation') ?? undefined
 
-      await registerUser({ ...values, tokenInvitation })
-
-      signIn('credentials', {
+      const result = await registerUser({ ...values, tokenInvitation })
+      const newUserId = result.id
+      await signIn('credentials', {
         ...values,
-        callbackUrl: '/home',
+        redirect: false,
       })
+
+      const organization = await createOrganization({
+        data: {
+          name: 'My Team',
+          roles: { create: { userId: newUserId, name: 'owner' } },
+        },
+      })
+
+      router.push(`/organizations/${organization.id}/ai-rag-upload`)
+
     } catch (error) {
       enqueueSnackbar(`Could not signup: ${error.message}`, {
         variant: 'error',
