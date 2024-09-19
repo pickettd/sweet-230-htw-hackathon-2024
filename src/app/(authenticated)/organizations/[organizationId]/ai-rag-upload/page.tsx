@@ -99,15 +99,27 @@ export default function AIRAGFileUploadPage() {
         <Col span={24}>
           <Title level={2}>File Upload</Title>
           <Text>
-            Let's get started by adding relevant HR documents such as Benefits, Holiday Schedules, and other policy documents.
-            The information in these documents provides the context needed to make Melbot the most helpful assistant.
+            Let's get started by adding relevant HR documents such as Benefits,
+            Holiday Schedules, and other policy documents. The information in
+            these documents provides the context needed to make Melbot the most
+            helpful assistant.
           </Text>
         </Col>
       </Row>
       <Row justify="center" style={{ marginTop: 20 }}>
         <Col span={24}>
           <Upload {...uploadProps} fileList={fileList}>
-            <Button icon={<UploadOutlined />}>Upload File</Button>
+            <Button
+              icon={<UploadOutlined />}
+              style={{
+                padding: '1.5em',
+                fontSize: '2em',
+                background: '#f2ee7d',
+                color: '#42436B',
+              }}
+            >
+              Upload File
+            </Button>
           </Upload>
         </Col>
       </Row>

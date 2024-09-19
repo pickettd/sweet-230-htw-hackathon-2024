@@ -21,11 +21,24 @@ export const LandingFooter: React.FC<Props> = ({ ...props }) => {
     <div className="relative mt-16" {...props}>
       <div className=" text-white py-16 px-8">
         <div className="max-w-7xl mx-auto text-center">
-          <Title level={1} className="mb-12 text-4xl lg:text-5xl">
+          <Title
+            level={1}
+            className="mb-12 text-4xl lg:text-5xl"
+            style={{ fontSize: '7em', color: '#fff' }}
+          >
             Revolutionize your HR processes with melbot
           </Title>
 
-          <LandingButton href="/signup" size="large">
+          <LandingButton
+            href="/signup"
+            size="large"
+            style={{
+              background: '#f3ee7d',
+              color: '#42436B',
+              fontSize: '2em',
+              padding: '1.5em',
+            }}
+          >
             Try today
           </LandingButton>
         </div>

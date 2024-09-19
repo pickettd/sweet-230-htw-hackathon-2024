@@ -2,11 +2,10 @@
 @import './landing.scss';
 
 :root {
-  --primary-color: #1890ff;
+  --primary-color: #fff4f1;
   --text-color: #333333;
   --background-color: #ffffff;
 }
-
 
 body {
   display: block;
@@ -15,7 +14,6 @@ body {
   color: var(--text-color);
   background-color: var(--background-color);
 }
-
 
 body,
 .mrb-main {
@@ -38,7 +36,16 @@ a {
 .ant-dropdown-menu-title-content a {
   text-decoration: none;
 }
-
+.ant-form-item-control-input-content .ant-input,
+.ant-form-item-control
+  .ant-form-item-control-input-content
+  .ant-input-affix-wrapper,
+div div span.ant-input-affix-wrapper,
+div div span.ant-input-affix-wrapper-focused.ant-input-affix-wrapper,
+div div span.ant-input-affix-wrapper.ant-input-affix-wrapper:hover {
+  border: 1px solid #42436b;
+  background: var(--primary-color);
+}
 .ant-layout-sider-children {
   width: 100%;
   display: flex;
@@ -88,7 +95,9 @@ a {
     color: #888888;
   }
 }
-
+.ant-card {
+  background: var(--primary-color) 40%;
+}
 .ant-btn-background-ghost {
   &:active,
   &:hover {
@@ -129,4 +138,19 @@ a {
   box-shadow:
     0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+div div.ant-dropdown .ant-dropdown-menu.ant-dropdown-menu-root {
+  background-color: var(--primary-color);
+  background: var(--primary-color);
+}
+.ant-table-content thead th.ant-table-cell,
+.ant-table-content tbody td.ant-table-cell {
+  background: var(--primary-color);
+}
+.ant-btn-default {
+  background: #f2ee7d !important;
+}
+.ant-pagination .ant-pagination-item-active,
+.ant-pagination .ant-pagination-item {
+  background: transparent;
 }

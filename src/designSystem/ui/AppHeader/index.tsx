@@ -20,9 +20,6 @@ export const AppHeader: React.FC<Props> = ({
       </Flex>
 
       <Flex vertical align="center">
-        <Title level={3} style={{ margin: 0 }}>
-          {title}
-        </Title>
         {description && <Text type="secondary">{description}</Text>}
       </Flex>
     </>
