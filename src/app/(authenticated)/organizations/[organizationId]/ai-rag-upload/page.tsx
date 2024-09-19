@@ -1,7 +1,7 @@
 'use client'
 
 import { useUserContext } from '@/core/context'
-import { useUploadPublic } from '@/core/hooks/upload'
+import { useUploadPrivate } from '@/core/hooks/upload'
 import { Api } from '@/core/trpc'
 import { PageLayout } from '@/designSystem/layouts/Page.layout'
 import { Product } from '@/server/libraries/payment'
@@ -15,7 +15,7 @@ const { Title, Text } = Typography
 export default function AIRAGFileUploadPage() {
   const router = useRouter()
   const params = useParams<any>()
-  const { user } = useUserContext()
+  const { user, organization } = useUserContext()
   const { enqueueSnackbar } = useSnackbar()
   const [fileList, setFileList] = useState<any[]>([])
   const { data: products } = Api.billing.findManyProducts.useQuery(
@@ -48,15 +48,17 @@ export default function AIRAGFileUploadPage() {
     data: files,
     isLoading,
     refetch,
-  } = Api.ragVector.findMany.useQuery({})
-  const { mutateAsync: upload } = useUploadPublic()
+  } = Api.ragVector.findMany.useQuery({
+    where: { tags: { has: organization.id } },
+  })
+  const { mutateAsync: upload } = useUploadPrivate()
   const { mutateAsync: loadFile } = Api.rag.loadFile.useMutation()
   const { mutateAsync: deleteFile } = Api.ragVector.delete.useMutation()
 
   const handleUpload = async (file: any) => {
     try {
       const { url } = await upload({ file })
-      const { key } = await loadFile({ url })
+      const { key } = await loadFile({ url, tags: [organization.id] })
       enqueueSnackbar('File uploaded successfully', { variant: 'success' })
       refetch()
     } catch (error) {

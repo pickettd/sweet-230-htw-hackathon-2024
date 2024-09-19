@@ -15,7 +15,7 @@ const { Title, Text } = Typography
 export default function ChatbotInteractionPage() {
   const router = useRouter()
   const params = useParams<any>()
-  const { user } = useUserContext()
+  const { user, organization } = useUserContext()
   const { enqueueSnackbar } = useSnackbar()
   const [question, setQuestion] = useState<string>('')
   const [chatHistory, setChatHistory] = useState<
@@ -56,8 +56,11 @@ export default function ChatbotInteractionPage() {
       return
     }
     try {
-      console.log('Starting Rag query now')
-      const response = await generateText({ prompt: question })
+      console.log('Starting Rag query now with org id', organization.id)
+      const response = await generateText({
+        prompt: question,
+        tags: [organization.id],
+      })
       const respAnswer = response.answer
       console.log(response)
 
