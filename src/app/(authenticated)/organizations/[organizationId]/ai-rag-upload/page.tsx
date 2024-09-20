@@ -10,6 +10,7 @@ import { Button, Col, List, Row, Spin, Typography, Upload } from 'antd'
 import { useParams, useRouter } from 'next/navigation'
 import { useSnackbar } from 'notistack'
 import { useState } from 'react'
+import Link from 'next/link'
 const { Title, Text } = Typography
 
 export default function AIRAGFileUploadPage() {
@@ -98,12 +99,16 @@ export default function AIRAGFileUploadPage() {
       <Row justify="center">
         <Col span={24}>
           <Title level={2}>File Upload</Title>
-          <Text>
-            Let's get started by adding relevant HR documents such as Benefits,
-            Holiday Schedules, and other policy documents. The information in
-            these documents provides the context needed to make Melbot the most
-            helpful assistant.
-          </Text>
+            { files?.length == 0 && (
+              <Title level={3}>Thanks for registering! Let's get started!
+              </Title>
+              )}
+            <Text>
+                Upload relevant HR documents such as Benefits,
+                Holiday Schedules, and other policy documents. The information in
+                these documents provides the context needed to make Melbot the most
+                helpful assistant.
+            </Text>
         </Col>
       </Row>
       <Row justify="center" style={{ marginTop: 20 }}>
@@ -123,34 +128,47 @@ export default function AIRAGFileUploadPage() {
           </Upload>
         </Col>
       </Row>
-      <Row justify="center" style={{ marginTop: 20 }}>
-        <Col span={24}>
-          {isLoading ? (
-            <Spin />
-          ) : (
-            <List
-              itemLayout="horizontal"
-              dataSource={files}
-              renderItem={(file: any) => (
-                <List.Item
-                  actions={[
-                    <Button
-                      type="link"
-                      icon={<DeleteOutlined />}
-                      onClick={() => handleDelete(file.id)}
-                    />,
-                  ]}
-                >
-                  <List.Item.Meta
-                    title={file.key}
-                    description={`Uploaded on ${file.dateCreated}`}
-                  />
-                </List.Item>
-              )}
-            />
-          )}
-        </Col>
-      </Row>
+      { files?.length != 0 &&
+        <Row justify="center" style={{ marginTop: 20 }}>
+          <Col span={24}>
+            {isLoading ? (
+              <Spin />
+            ) : (
+              <List
+                itemLayout="horizontal"
+                dataSource={files}
+                renderItem={(file: any) => (
+                  <List.Item
+                    actions={[
+                      <Button
+                        type="link"
+                        icon={<DeleteOutlined />}
+                        onClick={() => handleDelete(file.id)}
+                      />,
+                    ]}
+                  >
+                    <List.Item.Meta
+                      title={file.key}
+                      // description={`Uploaded on ${file.dateCreated}`}
+                    />
+                  </List.Item>
+                )}
+              />
+            )}
+          </Col>
+        </Row>
+      }
+      { files?.length != 0 && (
+        <div>
+        <Title level={3}>
+          Thanks for uploading. Next let's try asking Melbot questions about your document!
+          <br/>
+          <Link href={`/organizations/${organization.id}/chat`}>
+            Chat with Melbot
+          </Link>
+        </Title>
+        </div>
+        )}
     </PageLayout>
   )
 }
