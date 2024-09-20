@@ -2,7 +2,9 @@
 @import './landing.scss';
 
 :root {
-  --primary-color: #fff4f1;
+  --primary-color: #fcfbde;
+  --secondary-color: #f2ee7d;
+  --tertiary-color: #42436b;
   --text-color: #333333;
   --background-color: #ffffff;
 }
@@ -44,7 +46,7 @@ div div span.ant-input-affix-wrapper,
 div div span.ant-input-affix-wrapper-focused.ant-input-affix-wrapper,
 div div span.ant-input-affix-wrapper.ant-input-affix-wrapper:hover {
   border: 1px solid #42436b;
-  background: var(--primary-color);
+  background: var(--secondary-color);
 }
 .ant-layout-sider-children {
   width: 100%;
@@ -140,10 +142,12 @@ div div span.ant-input-affix-wrapper.ant-input-affix-wrapper:hover {
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 div div.ant-dropdown .ant-dropdown-menu.ant-dropdown-menu-root {
-  background-color: var(--primary-color);
-  background: var(--primary-color);
+  background-color: var(--secondary-color);
+  background: var(--secondary-color);
 }
-.ant-table-content thead th.ant-table-cell,
+.ant-table-content thead th.ant-table-cell {
+  background: var(--secondary-color);
+}
 .ant-table-content tbody td.ant-table-cell {
   background: var(--primary-color);
 }
@@ -153,4 +157,8 @@ div div.ant-dropdown .ant-dropdown-menu.ant-dropdown-menu-root {
 .ant-pagination .ant-pagination-item-active,
 .ant-pagination .ant-pagination-item {
   background: transparent;
+}
+.ant-btn-primary.ant-btn-dangerous {
+  background: var(--secondary-color);
+  color: var(--tertiary-color);
 }
