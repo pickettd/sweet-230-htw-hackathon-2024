@@ -95,18 +95,18 @@ export const NavigationLayout: React.FC<Props> = ({ children }) => {
         ),
     },
 
-    // {
-    //   key: '/organizations/:organizationId/pricing',
-    //   icon: <DollarOutlined />,
-    //   label: 'Pricing',
-    //   onClick: () =>
-    //     goTo(
-    //       '/organizations/:organizationId/pricing'.replace(
-    //         ':organizationId',
-    //         organization.id,
-    //       ),
-    //     ),
-    // },
+    {
+      key: '/organizations/:organizationId/pricing',
+      icon: <DollarOutlined />,
+      label: 'Pricing',
+      onClick: () =>
+        goTo(
+          '/organizations/:organizationId/pricing'.replace(
+            ':organizationId',
+            organization.id,
+          ),
+        ),
+    },
   ].filter(_ => !!organization)
 
   const itemsLeftbar = []
