@@ -1,5 +1,4 @@
 import { useUserContext } from '@/core/context'
-import { DollarOutlined } from '@ant-design/icons'
 import { Col, Layout, Row } from 'antd'
 import { useRouter } from 'next/navigation'
 import { ReactNode } from 'react'
@@ -79,6 +78,17 @@ export const NavigationLayout: React.FC<Props> = ({ children }) => {
       onClick: () =>
         goTo(
           '/organizations/:organizationId/billing'.replace(
+            ':organizationId',
+            organization.id,
+          ),
+        ),
+    },
+    {
+      key: '/organizations/:organizationId/all-files-rag',
+      label: 'See all files',
+      onClick: () =>
+        goTo(
+          '/organizations/:organizationId/all-files-rag'.replace(
             ':organizationId',
             organization.id,
           ),
