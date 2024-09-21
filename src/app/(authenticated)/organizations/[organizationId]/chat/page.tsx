@@ -3,14 +3,14 @@
 import { useUserContext } from '@/core/context'
 import { Api } from '@/core/trpc'
 import { PageLayout } from '@/designSystem/layouts/Page.layout'
-import { Product } from '@/server/libraries/payment'
+// import { Product } from '@/server/libraries/payment'
 import { SendOutlined } from '@ant-design/icons'
 import { Button, Col, Input, List, Row, Typography } from 'antd'
 import dayjs from 'dayjs'
+import Link from 'next/link'
 import { useParams, useRouter } from 'next/navigation'
 import { useSnackbar } from 'notistack'
 import { useState } from 'react'
-import Link from 'next/link'
 const { Title, Text } = Typography
 
 export default function ChatbotInteractionPage() {
@@ -22,30 +22,30 @@ export default function ChatbotInteractionPage() {
   const [chatHistory, setChatHistory] = useState<
     { question: string; answer: string; timestamp: number }[]
   >([])
-  const { data: products } = Api.billing.findManyProducts.useQuery(
-    {},
-    { initialData: [] },
-  )
-  const { data: subscriptions } = Api.billing.findManySubscriptions.useQuery(
-    {
-      organizationId: params.organizationId,
-    },
-    { initialData: [] },
-  )
-  const isSubscribed = (product: Product) => {
-    return subscriptions.find(
-      subscription => subscription.productId === product.id,
-    )
-  }
-  const isAnySubscribed = () => {
-    return (
-      subscriptions.find(
-        subscription =>
-          subscription.status === 'active' ||
-          subscription.status === 'trialing',
-      ) !== undefined
-    )
-  }
+  // const { data: products } = Api.billing.findManyProducts.useQuery(
+  //   {},
+  //   { initialData: [] },
+  // )
+  // const { data: subscriptions } = Api.billing.findManySubscriptions.useQuery(
+  //   {
+  //     organizationId: params.organizationId,
+  //   },
+  //   { initialData: [] },
+  // )
+  // const isSubscribed = (product: Product) => {
+  //   return subscriptions.find(
+  //     subscription => subscription.productId === product.id,
+  //   )
+  // }
+  // const isAnySubscribed = () => {
+  //   return (
+  //     subscriptions.find(
+  //       subscription =>
+  //         subscription.status === 'active' ||
+  //         subscription.status === 'trialing',
+  //     ) !== undefined
+  //   )
+  // }
 
   const { mutateAsync: generateAssistantText } =
     Api.ai.generateAssistantText.useMutation()
@@ -87,8 +87,8 @@ export default function ChatbotInteractionPage() {
         <Col span={24}>
           <Title level={2}>Chat</Title>
           <Text>
-            Ask Melbot questions about company policies, time off, and benefits. View
-            responses here.
+            Ask Melbot questions about company policies, time off, and benefits.
+            View responses here.
           </Text>
         </Col>
       </Row>
@@ -135,20 +135,21 @@ export default function ChatbotInteractionPage() {
           />
         </Col>
       </Row>
-      { chatHistory?.length != 0 && (
+      {chatHistory?.length != 0 && (
         <div>
-        <br/>
-        <br/>
-        <br/>
-        <Title level={3}>
-          Good Job. Let's make this easier for our team by adding Melbot to our team Slack.
-          <br/>
-          <Link href={`/api/slack/install`}>
-            Install Melbot in your team Slack
-          </Link>
-        </Title>
+          <br />
+          <br />
+          <br />
+          <Title level={3}>
+            Good Job. Let's make this easier for our team by adding Melbot to
+            our team Slack.
+            <br />
+            <Link href={`/api/slack/install`}>
+              Install Melbot in your team Slack
+            </Link>
+          </Title>
         </div>
-        )}
+      )}
     </PageLayout>
   )
 }
