@@ -1,16 +1,16 @@
 'use client'
 
 import { useUserContext } from '@/core/context'
-import { useUploadPrivate } from '@/core/hooks/upload'
+import { useUploadPublic } from '@/core/hooks/upload'
 import { Api } from '@/core/trpc'
 import { PageLayout } from '@/designSystem/layouts/Page.layout'
 import { Product } from '@/server/libraries/payment'
 import { DeleteOutlined, UploadOutlined } from '@ant-design/icons'
 import { Button, Col, List, Row, Spin, Typography, Upload } from 'antd'
+import Link from 'next/link'
 import { useParams, useRouter } from 'next/navigation'
 import { useSnackbar } from 'notistack'
 import { useState } from 'react'
-import Link from 'next/link'
 const { Title, Text } = Typography
 
 export default function AIRAGFileUploadPage() {
@@ -52,7 +52,7 @@ export default function AIRAGFileUploadPage() {
   } = Api.ragVector.findMany.useQuery({
     where: { tags: { has: organization.id } },
   })
-  const { mutateAsync: upload } = useUploadPrivate()
+  const { mutateAsync: upload } = useUploadPublic()
   const { mutateAsync: loadFile } = Api.rag.loadFile.useMutation()
   const { mutateAsync: deleteFile } = Api.ragVector.delete.useMutation()
 
@@ -99,16 +99,15 @@ export default function AIRAGFileUploadPage() {
       <Row justify="center">
         <Col span={24}>
           <Title level={2}>File Upload</Title>
-            { files?.length == 0 && (
-              <Title level={3}>Thanks for registering! Let's get started!
-              </Title>
-              )}
-            <Text>
-                Upload relevant HR documents such as Benefits,
-                Holiday Schedules, and other policy documents. The information in
-                these documents provides the context needed to make Melbot the most
-                helpful assistant.
-            </Text>
+          {files?.length == 0 && (
+            <Title level={3}>Thanks for registering! Let's get started!</Title>
+          )}
+          <Text>
+            Upload relevant HR documents such as Benefits, Holiday Schedules,
+            and other policy documents. The information in these documents
+            provides the context needed to make Melbot the most helpful
+            assistant.
+          </Text>
         </Col>
       </Row>
       <Row justify="center" style={{ marginTop: 20 }}>
@@ -128,7 +127,7 @@ export default function AIRAGFileUploadPage() {
           </Upload>
         </Col>
       </Row>
-      { files?.length != 0 &&
+      {files?.length != 0 && (
         <Row justify="center" style={{ marginTop: 20 }}>
           <Col span={24}>
             {isLoading ? (
@@ -157,18 +156,19 @@ export default function AIRAGFileUploadPage() {
             )}
           </Col>
         </Row>
-      }
-      { files?.length != 0 && (
+      )}
+      {files?.length != 0 && (
         <div>
-        <Title level={3}>
-          Thanks for uploading. Next let's try asking Melbot questions about your document!
-          <br/>
-          <Link href={`/organizations/${organization.id}/chat`}>
-            Chat with Melbot
-          </Link>
-        </Title>
+          <Title level={3}>
+            Thanks for uploading. Next let's try asking Melbot questions about
+            your document!
+            <br />
+            <Link href={`/organizations/${organization.id}/chat`}>
+              Chat with Melbot
+            </Link>
+          </Title>
         </div>
-        )}
+      )}
     </PageLayout>
   )
 }
