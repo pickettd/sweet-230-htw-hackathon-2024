@@ -137,17 +137,16 @@ export default function ChatbotInteractionPage() {
       </Row>
       {chatHistory?.length != 0 && (
         <div>
-          <br />
-          <br />
-          <br />
-          <Title level={3}>
-            Good Job. Let's make this easier for our team by adding Melbot to
-            our team Slack.
-            <br />
-            <Link href={`/api/slack/install`}>
-              Install Melbot in your team Slack
-            </Link>
-          </Title>
+        <br/>
+        <br/>
+        <br/>
+        <Title level={3}>
+          Good Job. Let's make this easier for our team by adding Melbot to our team Slack.
+          <br/>
+          <Link target='_blank' href={`/api/slack/install`}>
+            Install Melbot in your team Slack
+          </Link>
+        </Title>
         </div>
       )}
     </PageLayout>
