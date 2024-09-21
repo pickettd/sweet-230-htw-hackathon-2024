@@ -4,7 +4,7 @@ import { useUserContext } from '@/core/context'
 import { useUploadPublic } from '@/core/hooks/upload'
 import { Api } from '@/core/trpc'
 import { PageLayout } from '@/designSystem/layouts/Page.layout'
-import { Product } from '@/server/libraries/payment'
+//import { Product } from '@/server/libraries/payment'
 import { DeleteOutlined, UploadOutlined } from '@ant-design/icons'
 import { Button, Col, List, Row, Spin, Typography, Upload } from 'antd'
 import Link from 'next/link'
@@ -19,31 +19,31 @@ export default function AIRAGFileUploadPage() {
   const { user, organization } = useUserContext()
   const { enqueueSnackbar } = useSnackbar()
   const [fileList, setFileList] = useState<any[]>([])
-  const { data: products } = Api.billing.findManyProducts.useQuery(
-    {},
-    { initialData: [] },
-  )
-  const { data: subscriptions } = Api.billing.findManySubscriptions.useQuery(
-    {
-      organizationId: params.organizationId,
-    },
-    { initialData: [] },
-  )
-  const isSubscribed = (product: Product) => {
-    return subscriptions.find(
-      subscription => subscription.productId === product.id,
-    )
-  }
+  // const { data: products } = Api.billing.findManyProducts.useQuery(
+  //   {},
+  //   { initialData: [] },
+  // )
+  // const { data: subscriptions } = Api.billing.findManySubscriptions.useQuery(
+  //   {
+  //     organizationId: params.organizationId,
+  //   },
+  //   { initialData: [] },
+  // )
+  // const isSubscribed = (product: Product) => {
+  //   return subscriptions.find(
+  //     subscription => subscription.productId === product.id,
+  //   )
+  // }
 
-  const isAnySubscribed = () => {
-    return (
-      subscriptions.find(
-        subscription =>
-          subscription.status === 'active' ||
-          subscription.status === 'trialing',
-      ) !== undefined
-    )
-  }
+  // const isAnySubscribed = () => {
+  //   return (
+  //     subscriptions.find(
+  //       subscription =>
+  //         subscription.status === 'active' ||
+  //         subscription.status === 'trialing',
+  //     ) !== undefined
+  //   )
+  // }
 
   const {
     data: files,
