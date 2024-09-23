@@ -60,17 +60,17 @@ export const NavigationLayout: React.FC<Props> = ({ children }) => {
         ),
     },
 
-    {
-      key: '/organizations/:organizationId/users',
-      label: 'Users',
-      onClick: () =>
-        goTo(
-          '/organizations/:organizationId/users'.replace(
-            ':organizationId',
-            organization.id,
-          ),
-        ),
-    },
+    // {
+    //   key: '/organizations/:organizationId/users',
+    //   label: 'Users',
+    //   onClick: () =>
+    //     goTo(
+    //       '/organizations/:organizationId/users'.replace(
+    //         ':organizationId',
+    //         organization.id,
+    //       ),
+    //     ),
+    // },
 
     {
       key: '/organizations/:organizationId/billing',
@@ -83,17 +83,17 @@ export const NavigationLayout: React.FC<Props> = ({ children }) => {
           ),
         ),
     },
-    {
-      key: '/organizations/:organizationId/all-files-rag',
-      label: 'See all files',
-      onClick: () =>
-        goTo(
-          '/organizations/:organizationId/all-files-rag'.replace(
-            ':organizationId',
-            organization.id,
-          ),
-        ),
-    },
+    // {
+    //   key: '/organizations/:organizationId/all-files-rag',
+    //   label: 'See all files',
+    //   onClick: () =>
+    //     goTo(
+    //       '/organizations/:organizationId/all-files-rag'.replace(
+    //         ':organizationId',
+    //         organization.id,
+    //       ),
+    //     ),
+    // },
 
     {
       key: '/organizations/:organizationId/pricing',
