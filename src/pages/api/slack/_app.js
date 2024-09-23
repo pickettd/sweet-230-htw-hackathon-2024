@@ -97,7 +97,7 @@ const app = new App(appRunner.appOptions())
 // });
 
 app.message('', async ({ message, say, context }) => {
-  console.log('Starting app.message, context is ', { context })
+  //console.log('Starting app.message, context is ', { context })
   const prismaInstallation = await installationStore.fetchInstallation({
     teamId: context.teamId,
     enterpriseId: context.enterpriseId,
