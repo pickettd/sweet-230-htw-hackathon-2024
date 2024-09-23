@@ -29,6 +29,8 @@ export default function OrganizationSettingsPage() {
 
   const [form] = Form.useForm()
 
+  const slackInstallLink = '/api/slack/install/?melOrgId=' + organization.id
+
   useEffect(() => {
     form.setFieldsValue(organization)
   }, [organization])
@@ -62,7 +64,7 @@ export default function OrganizationSettingsPage() {
     <PageLayout layout="super-narrow">
       {checkOrganizationRole('owner') && (
         <Flex justify="center" style={{ marginBottom: '30px' }}>
-          <Link target="_blank" href="/api/slack/install">
+          <Link target="_blank" href={slackInstallLink}>
             Install Melbot to your Slack workspace
           </Link>
         </Flex>

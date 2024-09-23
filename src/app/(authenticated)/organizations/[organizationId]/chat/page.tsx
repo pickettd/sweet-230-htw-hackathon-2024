@@ -22,6 +22,8 @@ export default function ChatbotInteractionPage() {
   const [chatHistory, setChatHistory] = useState<
     { question: string; answer: string; timestamp: number }[]
   >([])
+
+  const slackInstallLink = '/api/slack/install/?melOrgId=' + organization.id
   // const { data: products } = Api.billing.findManyProducts.useQuery(
   //   {},
   //   { initialData: [] },
@@ -137,16 +139,17 @@ export default function ChatbotInteractionPage() {
       </Row>
       {chatHistory?.length != 0 && (
         <div>
-        <br/>
-        <br/>
-        <br/>
-        <Title level={3}>
-          Good Job. Let's make this easier for our team by adding Melbot to our team Slack.
-          <br/>
-          <Link target='_blank' href={`/api/slack/install`}>
-            Install Melbot in your team Slack
-          </Link>
-        </Title>
+          <br />
+          <br />
+          <br />
+          <Title level={3}>
+            Good Job. Let's make this easier for our team by adding Melbot to
+            our team Slack.
+            <br />
+            <Link target="_blank" href={slackInstallLink}>
+              Install Melbot in your team Slack
+            </Link>
+          </Title>
         </div>
       )}
     </PageLayout>
