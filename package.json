@@ -37,6 +37,8 @@
     "@seratch_/bolt-http-runner": "^1.0.5",
     "@seratch_/bolt-prisma": "^1.0.5",
     "@slack/bolt": "^3.21.4",
+    "@slack/logger": "^4.0.0",
+    "@slack/oauth": "^3.0.1",
     "@slack/web-api": "^7.4.0",
     "@tailwindcss/typography": "^0.5.13",
     "@tanstack/react-query": "^4.36.1",
