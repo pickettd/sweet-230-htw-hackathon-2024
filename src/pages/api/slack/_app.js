@@ -1,8 +1,9 @@
 import { RagService } from '@/server/libraries/rag'
 import { PrismaClient } from '@prisma/client'
 import { AppRunner } from '@seratch_/bolt-http-runner'
-import { PrismaInstallationStore } from '@seratch_/bolt-prisma'
+//import { PrismaInstallationStore } from '@seratch_/bolt-prisma'
 import { App, LogLevel } from '@slack/bolt'
+import MelPrismaInstallationStore from '../../../server/libraries/slack/MelPrismaInstallationStore/MelPrismaInstallationStore'
 
 function extractCookieValue(req, name) {
   const allCookies = req.headers.cookie
@@ -29,10 +30,17 @@ const prismaClient = new PrismaClient({
 const installerOptions = {
   installPathOptions: {
     beforeRedirection: async (req, res, options) => {
-      const marbOrgId = '1111'
-      res.setHeader('Set-Cookie', [
-        `marbOrgId=${marbOrgId}; Secure; HttpOnly; Path=/; Max-Age=600`,
-      ])
+      const melOrgId = req?.query?.['melOrgId']
+      if (melOrgId) {
+        console.log(
+          '\nin the installPathOptions:beforeRedirection, found query params melOrgId',
+          { melOrgId },
+          '\n',
+        )
+        res.setHeader('Set-Cookie', [
+          `melOrgId=${melOrgId}; Secure; HttpOnly; Path=/; Max-Age=600`,
+        ])
+      }
       return true // continuing
     },
   },
@@ -40,14 +48,14 @@ const installerOptions = {
     afterInstallation: async (installation, options, req, res) => {
       // Attach an additional value to the installation object
       // After this function execution, InstallationStore#storeInstallation() will be performed with the modified installation
-      installation.marbOrgId = extractCookieValue(req, 'marbOrgId')
+      installation.organizationId = extractCookieValue(req, 'melOrgId')
       console.log({ installation })
       return true // continuing
     },
   },
 }
 
-const installationStore = new PrismaInstallationStore({
+const installationStore = new MelPrismaInstallationStore({
   // The name `slackAppInstallation` can be different
   // if you use a different name in your Prisma schema
   prismaTable: prismaClient.slackAppInstallation,
@@ -89,15 +97,25 @@ const app = new App(appRunner.appOptions())
 // });
 
 app.message('', async ({ message, say, context }) => {
-  // console.log('Starting app.message, context is ', { context })
-  // const prismaInstallation = await installationStore.fetchInstallation({
-  //   teamId: context.teamId,
-  //   enterpriseId: context.enterpriseId,
-  //   isEnterpriseInstall: context.isEnterpriseInstall,
-  // })
-  // console.log(
-  //   `\nprismaInstallationStore.fetchInstallation: ${JSON.stringify(prismaInstallation)}\n`,
-  // )
+  console.log('Starting app.message, context is ', { context })
+  const prismaInstallation = await installationStore.fetchInstallation({
+    teamId: context.teamId,
+    enterpriseId: context.enterpriseId,
+    isEnterpriseInstall: context.isEnterpriseInstall,
+  })
+
+  const orgToQuery = prismaInstallation?.organizationId
+  const tagsToQuery = []
+  if (orgToQuery) {
+    tagsToQuery.push(orgToQuery)
+  }
+  console.log(
+    '\n prismaInstallationStore.fetchInstallation in Slack event handler',
+    //`\nprismaInstallationStore.fetchInstallation: ${JSON.stringify(prismaInstallation)}`,
+    { tagsToQuery },
+    '\n',
+  )
+
   // if we can get the orgId for the install from fetchInstallation
   // can pass it into the RagService.query tags param
 
@@ -105,7 +123,7 @@ app.message('', async ({ message, say, context }) => {
   // console.log('hello message')
   console.log('This is the IM Message from Slack', msgText)
   let answer = 'checking LLM: ' + msgText
-  answer = await RagService.query(msgText, [], [])
+  answer = await RagService.query(msgText, [], tagsToQuery)
   // say() sends a message to the channel where the event was triggered
   await say(answer)
 })
